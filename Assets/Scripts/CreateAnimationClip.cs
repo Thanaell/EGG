@@ -1,18 +1,17 @@
 using UnityEngine;
 using UnityEditor.Animations;
+using UnityEditor;
 
 public class CreateAnimationClip : MonoBehaviour
 {
     public AnimationClip clip;
+    private GameObject objectToRecord;
     private GameObjectRecorder m_Recorder;
+    public string objectName;
 
-    void Start()
+    void findObject()
     {
-        // Create recorder and record the script GameObject.
-        m_Recorder = new GameObjectRecorder(gameObject);
-
-        // Bind all the Transforms on the GameObject and all its children.
-        m_Recorder.BindComponentsOfType<Transform>(gameObject, true);
+        objectToRecord = GameObject.Find(objectName);
     }
 
     void LateUpdate()
@@ -20,8 +19,26 @@ public class CreateAnimationClip : MonoBehaviour
         if (clip == null)
             return;
 
-        // Take a snapshot and record all the bindings values for this frame.
-        m_Recorder.TakeSnapshot(Time.deltaTime);
+        if (objectToRecord == null)
+        {
+            findObject();
+            if (objectToRecord == null)
+                return;
+            else
+            {
+                Debug.Log("found Cube");
+                // Create recorder and record the script GameObject.
+                m_Recorder = new GameObjectRecorder(objectToRecord);
+                // Bind all the Transforms on the GameObject and all its children.
+                m_Recorder.BindComponentsOfType<Transform>(objectToRecord, true);
+            }
+        }
+        else
+        {
+            // Take a snapshot and record all the bindings values for this frame.
+            m_Recorder.TakeSnapshot(Time.deltaTime);
+            Debug.Log("snapshot");
+        }   
     }
 
     void OnDisable()
