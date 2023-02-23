@@ -5,6 +5,7 @@ using UnityEngine;
 public class OffsetPosition : MonoBehaviour
 {
     public GameObject userHand;
+    public GameObject cameraRig;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +15,7 @@ public class OffsetPosition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.position= userHand.transform.position + new Vector3(0f,0f,0.6f);
+        this.transform.position= userHand.transform.position+ 0.5f*cameraRig.transform.forward;
+        this.transform.rotation=userHand.transform.rotation;
     }
 }
