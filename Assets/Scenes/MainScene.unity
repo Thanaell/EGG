@@ -432,7 +432,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-  mode: 0
+  mode: 1
 --- !u!4 &628235730
 Transform:
   m_ObjectHideFlags: 0

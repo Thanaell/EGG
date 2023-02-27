@@ -44,8 +44,7 @@ public class StoryController : MonoBehaviour
         //10-20 : Anim
         if (timeCount>10 && state==HAND_STATE.TRACKING){
             handStateEvent.Invoke(HAND_STATE.ANIM);
-            state=HAND_STATE.ANIM;
-            
+            state=HAND_STATE.ANIM;         
         }
         if (timeCount>20 && state==HAND_STATE.ANIM){
             handStateEvent.Invoke(HAND_STATE.TRACKING);
@@ -54,15 +53,16 @@ public class StoryController : MonoBehaviour
         }
         switch(mode){
             case STORY_MODE.OVERRIDE_TRACKING:{
+
                 ControlState(overrideAnimator);
                 break;
             }
             case STORY_MODE.GHOST_HAND_EXTERNAL:{
-                ControlState(externalAnimator);
+                ControlState(externalAnimator, ghostHandExternal);
                 break;
             }
             case STORY_MODE.GHOST_HAND_ROOT:{
-                ControlState(rootAnimator);
+                ControlState(rootAnimator, ghostHandRoot);
                 break;
             }
             default:break;
@@ -72,12 +72,18 @@ public class StoryController : MonoBehaviour
 
     }
 
-    void ControlState(Animator animator){
+    void ControlState(Animator animator, GameObject ghostHand=null){
         if (state==HAND_STATE.TRACKING && animator.enabled==true){
             animator.enabled=false;
+            if (ghostHand!=null){
+                ghostHand.SetActive(false);
+            }
         }
         if (state==HAND_STATE.ANIM && animator.enabled==false){
-            animator.enabled=true;
+            if (ghostHand!=null){
+                ghostHand.SetActive(true);
+            }
+            animator.enabled=true;            
         }
     }
 
