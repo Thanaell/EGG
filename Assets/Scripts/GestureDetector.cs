@@ -4,17 +4,17 @@ using UnityEngine.Events;
 using System.Collections;
 using System;
 
-// struct = class without functions
 [System.Serializable]
 public struct Gesture
 {
     public string name;
     public List<Vector3> fingerDatas;
-    public UnityEvent onRecognized;
 }
 
 public class GestureDetector : MonoBehaviour
 {
+
+    public UnityEvent<Gesture> onRecognized;
     // How much accurate the recognize should be
     [Header("Threshold value")]
     public float threshold = 0.1f;
@@ -69,7 +69,7 @@ public class GestureDetector : MonoBehaviour
     {
         // Populate the private list of fingerbones from the current hand we put in the skeleton
         fingerbones = new List<OVRBone>(skeleton.Bones);
-        Debug.Log(fingerbones.Count);
+        //Debug.Log(fingerbones.Count);
     }
 
     void Update()
@@ -96,9 +96,9 @@ public class GestureDetector : MonoBehaviour
             {
                 // we change another boolean to avoid a loop of event
                 done = true;
-                Debug.Log("recognized");
+                //Debug.Log("recognized");
                 // after that i will invoke what put in the Event if is present
-                currentGesture.onRecognized?.Invoke();
+                onRecognized?.Invoke(currentGesture);
             }
             // if the gesture we done is no more recognized
             else
@@ -106,7 +106,7 @@ public class GestureDetector : MonoBehaviour
                 // and we just activated the boolean from earlier
                 if (done)
                 {
-                    Debug.Log("Not Recognized");
+                    //Debug.Log("Not Recognized");
                     // we set to false the boolean again, so this will not loop
                     done = false;
 
@@ -198,8 +198,8 @@ public class GestureDetector : MonoBehaviour
         return currentGesture;
     }
 
-    public void DebugGestureName(string name)
+    public void DebugGestureName(Gesture gesture)
     {
-        Debug.Log(name);
+        //Debug.Log(gesture.name);
     }
 }

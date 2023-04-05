@@ -846,6 +846,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2015480566}
   - component: {fileID: 2015480565}
+  - component: {fileID: 2015480567}
   m_Layer: 0
   m_Name: GestureDetection
   m_TagString: Untagged
@@ -865,50 +866,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55b2d1af4ff877644aa40e5c9b24e02e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threshold: 0.05
+  onRecognized:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2015480565}
+        m_TargetAssemblyTypeName: GestureDetector, Assembly-CSharp
+        m_MethodName: DebugGestureName
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 2015480567}
+        m_TargetAssemblyTypeName: DynamicGestureDetector, Assembly-CSharp
+        m_MethodName: keyFrameRecognized
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+  threshold: 0.03
   skeleton: {fileID: 1897373187}
   gestures:
-  - name: HandCircle
-    fingerDatas:
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: -0.02006931, y: -0.0115541, z: -0.010496515}
-    - {x: -0.036835272, y: -0.021100402, z: -0.026162405}
-    - {x: -0.0570843, y: -0.043150466, z: -0.038845483}
-    - {x: -0.08363531, y: -0.06393478, z: -0.04108844}
-    - {x: -0.09599624, y: -0.0073164627, z: -0.023550669}
-    - {x: -0.123225495, y: -0.03360758, z: -0.025964009}
-    - {x: -0.114996895, y: -0.056393124, z: -0.024020664}
-    - {x: -0.09564662, y: -0.0025431663, z: -0.0017259046}
-    - {x: -0.13786887, y: -0.010289565, z: -0.0017657652}
-    - {x: -0.15183213, y: -0.034028053, z: -0.0024664812}
-    - {x: -0.0886938, y: -0.006529309, z: 0.017465245}
-    - {x: -0.12663098, y: 0.00070501864, z: 0.02286252}
-    - {x: -0.14767271, y: -0.015513644, z: 0.022274429}
-    - {x: -0.034073565, y: -0.009419836, z: 0.022998568}
-    - {x: -0.07789586, y: -0.013691194, z: 0.03505408}
-    - {x: -0.10488856, y: -0.0039604455, z: 0.04602905}
-    - {x: -0.12265114, y: -0.013106301, z: 0.049689107}
-    - {x: -0.09918581, y: -0.07406788, z: -0.024910904}
-    - {x: -0.09847367, y: -0.07107696, z: -0.020467285}
-    - {x: -0.1582109, y: -0.058164284, z: -0.0036455244}
-    - {x: -0.16101766, y: -0.035605296, z: 0.018717658}
-    - {x: -0.13882099, y: -0.027860902, z: 0.047966428}
-    onRecognized:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2015480565}
-          m_TargetAssemblyTypeName: GestureDetector, Assembly-CSharp
-          m_MethodName: DebugGestureName
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: handCircle
-            m_BoolArgument: 0
-          m_CallState: 1
   - name: Devil
     fingerDatas:
     - {x: 0, y: 0, z: 0}
@@ -935,21 +922,6 @@ MonoBehaviour:
     - {x: -0.06330367, y: -0.022535045, z: -0.010310944}
     - {x: -0.049588103, y: -0.026208255, z: -0.00043622777}
     - {x: -0.10552376, y: -0.07990129, z: 0.02873522}
-    onRecognized:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2015480565}
-          m_TargetAssemblyTypeName: GestureDetector, Assembly-CSharp
-          m_MethodName: DebugGestureName
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: devil
-            m_BoolArgument: 0
-          m_CallState: 1
   - name: Fist
     fingerDatas:
     - {x: 0, y: 0, z: 0}
@@ -976,21 +948,6 @@ MonoBehaviour:
     - {x: -0.069846235, y: -0.027586438, z: -0.010366354}
     - {x: -0.059776053, y: -0.024330359, z: 0.0026301555}
     - {x: -0.049249966, y: -0.024529584, z: 0.01605124}
-    onRecognized:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2015480565}
-          m_TargetAssemblyTypeName: GestureDetector, Assembly-CSharp
-          m_MethodName: DebugGestureName
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: fist
-            m_BoolArgument: 0
-          m_CallState: 1
   debugMode: 1
   notRecognize:
     m_PersistentCalls:
@@ -1010,6 +967,89 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2015480567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015480564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c142bce7d3ef9004c9d51870751a8018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dynamicGestures:
+  - name: DevilFist
+    orderedKeyFrames:
+    - name: Devil
+      fingerDatas:
+      - {x: 0, y: 0, z: 0}
+      - {x: 0, y: 0, z: 0}
+      - {x: -0.020069312, y: -0.011554098, z: -0.010496523}
+      - {x: -0.037023786, y: -0.021531858, z: -0.025683358}
+      - {x: -0.06606737, y: -0.026700854, z: -0.039352383}
+      - {x: -0.09740041, y: -0.027737081, z: -0.05196744}
+      - {x: -0.09599626, y: -0.007316433, z: -0.023550704}
+      - {x: -0.13033885, y: -0.023098215, z: -0.020387903}
+      - {x: -0.14951876, y: -0.03785026, z: -0.018112846}
+      - {x: -0.09564664, y: -0.0025431588, z: -0.0017259046}
+      - {x: -0.10414359, y: -0.044607647, z: -0.000673607}
+      - {x: -0.07708254, y: -0.04282927, z: -0.0055230893}
+      - {x: -0.0886938, y: -0.0065292977, z: 0.017465219}
+      - {x: -0.08995703, y: -0.04538272, z: 0.014381036}
+      - {x: -0.06493452, y: -0.04419391, z: 0.005515054}
+      - {x: -0.034073565, y: -0.00941983, z: 0.022998568}
+      - {x: -0.07789586, y: -0.013691179, z: 0.035054043}
+      - {x: -0.09419139, y: -0.039733388, z: 0.034992382}
+      - {x: -0.09929752, y: -0.059300147, z: 0.033089273}
+      - {x: -0.11542815, y: -0.029512003, z: -0.0686426}
+      - {x: -0.16872776, y: -0.048736617, z: -0.01440344}
+      - {x: -0.06330367, y: -0.022535045, z: -0.010310944}
+      - {x: -0.049588103, y: -0.026208255, z: -0.00043622777}
+      - {x: -0.10552376, y: -0.07990129, z: 0.02873522}
+    - name: Fist
+      fingerDatas:
+      - {x: 0, y: 0, z: 0}
+      - {x: 0, y: 0, z: 0}
+      - {x: -0.020069301, y: -0.011554107, z: -0.010496523}
+      - {x: -0.038287267, y: -0.024651807, z: -0.021183264}
+      - {x: -0.06479341, y: -0.042137638, z: -0.02816613}
+      - {x: -0.09506375, y: -0.05557014, z: -0.021439545}
+      - {x: -0.09599626, y: -0.0073164552, z: -0.02355069}
+      - {x: -0.11407028, y: -0.040529095, z: -0.020595629}
+      - {x: -0.090259835, y: -0.045314528, z: -0.021505758}
+      - {x: -0.09564662, y: -0.0025431588, z: -0.0017259158}
+      - {x: -0.111085445, y: -0.04252263, z: 0.000725843}
+      - {x: -0.08444044, y: -0.047044627, z: -0.004619628}
+      - {x: -0.08869381, y: -0.0065293238, z: 0.017465252}
+      - {x: -0.09626355, y: -0.044758543, z: 0.016079165}
+      - {x: -0.07131155, y: -0.045368508, z: 0.006959416}
+      - {x: -0.03407357, y: -0.009419827, z: 0.02299857}
+      - {x: -0.07789585, y: -0.013691196, z: 0.035054043}
+      - {x: -0.0794415, y: -0.04324562, z: 0.026814528}
+      - {x: -0.060486287, y: -0.04307279, z: 0.019519094}
+      - {x: -0.108095564, y: -0.05908791, z: -0.00084809214}
+      - {x: -0.07790445, y: -0.026718676, z: -0.023178235}
+      - {x: -0.069846235, y: -0.027586438, z: -0.010366354}
+      - {x: -0.059776053, y: -0.024330359, z: 0.0026301555}
+      - {x: -0.049249966, y: -0.024529584, z: 0.01605124}
+    execTime: 3
+  onRecognized:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2015480567}
+        m_TargetAssemblyTypeName: DynamicGestureDetector, Assembly-CSharp
+        m_MethodName: DebugDynamicGesture
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!4 &2031538067 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4417149081627286, guid: c6a74181d4000004887343fb87b3c53a, type: 3}
