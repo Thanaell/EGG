@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DynamicGesture", menuName = "ScriptableObjects/DynamicGesture", order = 2)]
-public class ScriptableDynamicGesture : ScriptableObject
+public class DynamicGesture : ScriptableObject
 {
     public string name;
     [SerializeField]

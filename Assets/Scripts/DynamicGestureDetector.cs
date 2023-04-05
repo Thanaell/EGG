@@ -4,14 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-[System.Serializable]
-public struct DynamicGesture
-{
-    public string name;
-    public List<StaticGesture> orderedKeyFrames; //not sorted so that it can show in the editor. Careful !
-    public float execTime; //time to execute in seconds
-}
-
 
 public class DynamicGestureDetector : MonoBehaviour
 {
