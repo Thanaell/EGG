@@ -3,18 +3,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 using System;
+using System.IO;
+using Unity.VisualScripting;
 
-[System.Serializable]
-public struct Gesture
-{
-    public string name;
-    public List<Vector3> fingerDatas;
-}
 
 public class GestureDetector : MonoBehaviour
 {
-
-    public UnityEvent<Gesture> onRecognized;
+    public UnityEvent<StaticGesture> onRecognized;
     // How much accurate the recognize should be
     [Header("Threshold value")]
     public float threshold = 0.1f;
@@ -25,7 +20,7 @@ public class GestureDetector : MonoBehaviour
 
     // List that will be populated after we save some gestures
     [Header("List of Gestures")]
-    public List<Gesture> gestures;
+    public List<StaticGesture> gestures;
 
     // List of bones took from the OVRSkeleton
     private List<OVRBone> fingerbones = null;
@@ -69,7 +64,6 @@ public class GestureDetector : MonoBehaviour
     {
         // Populate the private list of fingerbones from the current hand we put in the skeleton
         fingerbones = new List<OVRBone>(skeleton.Bones);
-        //Debug.Log(fingerbones.Count);
     }
 
     void Update()
@@ -85,11 +79,11 @@ public class GestureDetector : MonoBehaviour
         if (hasStarted.Equals(true))
         {
             // start to Recognize every gesture we make
-            Gesture currentGesture = Recognize();
+            StaticGesture currentGesture = Recognize();
 
             // we will associate the recognize to a boolean to see if the Gesture
             // we are going to make is one of the gesture we already saved
-            hasRecognize = !currentGesture.Equals(new Gesture());
+            hasRecognize = (currentGesture);
 
             // and if the gesture is recognized
             if (hasRecognize)
@@ -120,7 +114,7 @@ public class GestureDetector : MonoBehaviour
     void Save()
     {
         // We create a new Gesture struct
-        Gesture g = new Gesture();
+        StaticGesture g = StaticGesture.CreateInstance<StaticGesture>();
 
         // givin to it a default name
         g.name = "New Gesture";
@@ -142,12 +136,18 @@ public class GestureDetector : MonoBehaviour
 
         // and in the end we will going to add this new gesture in our list of gestures
         gestures.Add(g);
+
+        UnityEditor.AssetDatabase.CreateAsset(g, "Assets/Gestures/Static/NewGesture.asset");
+        UnityEditor.AssetDatabase.SaveAssets();
+        UnityEditor.AssetDatabase.Refresh();
+
     }
 
-    Gesture Recognize()
+    StaticGesture Recognize()
     {
+        bool found = false;
         // in the Update if we initialized correctly, we create a new Gesture
-        Gesture currentGesture = new Gesture();
+        StaticGesture currentGesture = StaticGesture.CreateInstance<StaticGesture>(); ;
 
         // we set a new float of a positive infinity
         float currentMin = Mathf.Infinity;
@@ -191,15 +191,17 @@ public class GestureDetector : MonoBehaviour
 
                 // and we associate the correct gesture we have just done to the variable we created
                 currentGesture = gesture;
+                found = true;
             }
         }
 
         // so in the end we can return from the function the exact gesture we want to do
-        return currentGesture;
+        if (!found) return null;
+        else return currentGesture;
     }
 
-    public void DebugGestureName(Gesture gesture)
+    public void DebugGestureName(StaticGesture gesture)
     {
-        //Debug.Log(gesture.name);
+        Debug.Log(gesture.name);
     }
 }

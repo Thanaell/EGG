@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public struct DynamicGesture
 {
     public string name;
-    public List<Gesture> orderedKeyFrames; //not sorted so that it can show in the editor. Careful !
+    public List<StaticGesture> orderedKeyFrames; //not sorted so that it can show in the editor. Careful !
     public float execTime; //time to execute in seconds
 }
 
@@ -51,20 +51,19 @@ public class DynamicGestureDetector : MonoBehaviour
         foreach (var dynamicGesture in timersToRemove) //removing expired timers
         {
             runningTimers.Remove(dynamicGesture);
-            Debug.Log("stopping timer");
         }
         foreach (var dynamicGesture in timersToAdvance) //advancing other timers
         {
             runningTimers[dynamicGesture] += Time.deltaTime;
-            Debug.Log(runningTimers[dynamicGesture]);
+
         }
     }
 
-    public void keyFrameRecognized(Gesture gesture)
+    public void keyFrameRecognized(StaticGesture gesture)
     {
         foreach (var dynamicGesture in dynamicGestures)
         {
-            Debug.Log(gesture.name + " keyframe recognized");
+            //Debug.Log(gesture.name + " keyframe recognized");
             if (dynamicGesture.orderedKeyFrames[0].name == gesture.name){ //first keyframe reached or rereached (resets gesture) => no gesture with several times the same keyframe
                 //start timer
                 runningTimers[dynamicGesture] = 0f;
