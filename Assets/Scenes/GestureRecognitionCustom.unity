@@ -893,7 +893,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-  threshold: 0.03
+  threshold: 0.05
   skeleton: {fileID: 1897373187}
   gestures:
   - name: Devil

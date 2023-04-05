@@ -35,18 +35,28 @@ public class DynamicGestureDetector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //removing expired timers and making the present ones advance
+        List<DynamicGesture> timersToRemove = new List<DynamicGesture>();
+        List<DynamicGesture> timersToAdvance = new List<DynamicGesture>();
         foreach (var timer in runningTimers)
         {
             if (timer.Value > timer.Key.execTime)
             {
-                runningTimers.Remove(timer.Key);
-                Debug.Log("stopping timer");
+                timersToRemove.Add(timer.Key); //marking expired timers (not removing them during the iteration)
             }
             else
             {
-                runningTimers[timer.Key] += Time.deltaTime;
+                timersToAdvance.Add(timer.Key); //marking other timers (not doing it during the iteration)
             }
+        }
+        foreach (var dynamicGesture in timersToRemove) //removing expired timers
+        {
+            runningTimers.Remove(dynamicGesture);
+            Debug.Log("stopping timer");
+        }
+        foreach (var dynamicGesture in timersToAdvance) //advancing other timers
+        {
+            runningTimers[dynamicGesture] += Time.deltaTime;
+            Debug.Log(runningTimers[dynamicGesture]);
         }
     }
 
