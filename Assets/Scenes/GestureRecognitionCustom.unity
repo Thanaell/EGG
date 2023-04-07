@@ -871,11 +871,11 @@ PrefabInstance:
     - target: {fileID: 6211622209441265081, guid: 4058866ed7169d1468c1dcecd8d634dc, type: 3}
       propertyPath: gestures.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: bb404005569090f449efcc8cdb04d34f, type: 2}
+      objectReference: {fileID: 11400000, guid: c5bf0f148a39f04448744a6bfdc40ec9, type: 2}
     - target: {fileID: 6211622209441265081, guid: 4058866ed7169d1468c1dcecd8d634dc, type: 3}
       propertyPath: gestures.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 8a74db970f0b1e1478fb3b77eb81b50c, type: 2}
+      objectReference: {fileID: 11400000, guid: 87fce787261c0f048b95d184b07a7208, type: 2}
     - target: {fileID: 6211622209441265081, guid: 4058866ed7169d1468c1dcecd8d634dc, type: 3}
       propertyPath: gestures.Array.data[2]
       value: 
@@ -943,7 +943,7 @@ PrefabInstance:
     - target: {fileID: 6211622209441265083, guid: 4058866ed7169d1468c1dcecd8d634dc, type: 3}
       propertyPath: dynamicGestures.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: bec9e75310b502345b9212f8d010eb9d, type: 2}
+      objectReference: {fileID: 11400000, guid: 80b84d538e982804381f94f8255ac56d, type: 2}
     - target: {fileID: 6211622209441265083, guid: 4058866ed7169d1468c1dcecd8d634dc, type: 3}
       propertyPath: dynamicGestures.Array.data[1]
       value: 

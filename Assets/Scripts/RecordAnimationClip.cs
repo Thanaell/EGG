@@ -16,6 +16,10 @@ public class RecordAnimationClip : MonoBehaviour
 
     void LateUpdate()
     {
+
+        if (Input.GetKeyDown(KeyCode.Space)){
+            OnDisable();
+        }
         if (clip == null)
             return;
 

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c9a668520eb5241a6211f0fe50440b, type: 3}
+  m_Name: GuillaumeThing
+  m_EditorClassIdentifier: 
+  name: GuillaumeThing
+  orderedKeyFrames:
+  - {fileID: 11400000, guid: c5bf0f148a39f04448744a6bfdc40ec9, type: 2}
+  - {fileID: 11400000, guid: 87fce787261c0f048b95d184b07a7208, type: 2}
+  - {fileID: 11400000, guid: 326c4bedfb19a2c44b143adf0eb9427d, type: 2}
+  execTime: 5
