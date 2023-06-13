@@ -131,7 +131,11 @@ public class DWTAlgo : MonoBehaviour
             }
             bonePositions.Add(frameBonePositions);
         }
-        Debug.Log(bonePositions[0][3]);
+        for (int i = 0; i<24; i++)
+        {
+            Debug.Log(bonePositions[0][i]);
+            
+        }
         return bonePositions;
     }
 
