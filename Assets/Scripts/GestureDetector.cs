@@ -9,6 +9,8 @@ using Unity.VisualScripting;
 
 public class GestureDetector : MonoBehaviour
 {
+    private int gestureCount=0;
+
     public UnityEvent<StaticGesture> onRecognized;
     // How much accurate the recognize should be
     [Header("Threshold value")]
@@ -117,7 +119,8 @@ public class GestureDetector : MonoBehaviour
         StaticGesture g = StaticGesture.CreateInstance<StaticGesture>();
 
         // givin to it a default name
-        g.name = "New Gesture";
+        g.name = "New Gesture"+gestureCount.ToString();
+        gestureCount++;
 
         // we create also a new list of Vector 3
         List<Vector3> data = new List<Vector3>();
@@ -137,7 +140,7 @@ public class GestureDetector : MonoBehaviour
         // and in the end we will going to add this new gesture in our list of gestures
         gestures.Add(g);
 
-        UnityEditor.AssetDatabase.CreateAsset(g, "Assets/Gestures/Static/NewGesture.asset");
+        UnityEditor.AssetDatabase.CreateAsset(g, "Assets/Gestures/Static/"+g.name+".asset");
         UnityEditor.AssetDatabase.SaveAssets();
         UnityEditor.AssetDatabase.Refresh();
 

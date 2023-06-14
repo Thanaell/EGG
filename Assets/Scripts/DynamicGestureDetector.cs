@@ -76,6 +76,7 @@ public class DynamicGestureDetector : MonoBehaviour
                         runningTimers.Remove(dynamicGesture);
                         //remove reachedKeyFrame
                         reachedKeyFrame[dynamicGesture] = -1;
+                        DebugDynamicGesture(dynamicGesture);
                     }
                     else //intermediate keyframe reached
                     {
