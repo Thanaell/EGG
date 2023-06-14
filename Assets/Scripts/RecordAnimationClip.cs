@@ -9,6 +9,7 @@ public class RecordAnimationClip : MonoBehaviour
     private GameObjectRecorder m_Recorder;
     public string objectName;
     private int frameCount=0;
+    bool isRecording = false;
     void findObject()
     {
         objectToRecord = GameObject.Find(objectName);
@@ -18,32 +19,43 @@ public class RecordAnimationClip : MonoBehaviour
     {
 
         if (Input.GetKeyDown(KeyCode.Space)){
-            OnDisable();
-        }
-        if (clip == null)
-            return;
-
-        if (objectToRecord == null)
-        {
-            findObject();
-            if (objectToRecord == null)
-                return;
+            if (!isRecording)
+            {
+                isRecording = true;
+            }
             else
             {
-                Debug.Log("found Object");
-                // Create recorder and record the script GameObject.
-                m_Recorder = new GameObjectRecorder(objectToRecord);
-                // Bind all the Transforms on the GameObject and all its children.
-                m_Recorder.BindComponentsOfType<Transform>(objectToRecord, true);
+                OnDisable();
+            }
+            
+        }
+        if (isRecording)
+        {
+            if (clip == null)
+                return;
+
+            if (objectToRecord == null)
+            {
+                findObject();
+                if (objectToRecord == null)
+                    return;
+                else
+                {
+                    Debug.Log("found Object");
+                    // Create recorder and record the script GameObject.
+                    m_Recorder = new GameObjectRecorder(objectToRecord);
+                    // Bind all the Transforms on the GameObject and all its children.
+                    m_Recorder.BindComponentsOfType<Transform>(objectToRecord, true);
+                }
+            }
+            else
+            {
+                // Take a snapshot and record all the bindings values for this frame.
+                m_Recorder.TakeSnapshot(Time.deltaTime);
+                frameCount++;
+
             }
         }
-        else
-        {
-            // Take a snapshot and record all the bindings values for this frame.
-            m_Recorder.TakeSnapshot(Time.deltaTime);
-            frameCount++;
-
-        }   
     }
 
     void OnDisable()

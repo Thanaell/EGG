@@ -42,15 +42,15 @@ public class StoryController : MonoBehaviour
     {
          //0-10 : Tracking
         //10-20 : Anim
-        if (timeCount>10 && state==HAND_STATE.TRACKING){
+        if (timeCount>3 && state==HAND_STATE.TRACKING){
             handStateEvent.Invoke(HAND_STATE.ANIM);
             state=HAND_STATE.ANIM;         
         }
-        if (timeCount>20 && state==HAND_STATE.ANIM){
+        /*if (timeCount>20 && state==HAND_STATE.ANIM){
             handStateEvent.Invoke(HAND_STATE.TRACKING);
             state=HAND_STATE.TRACKING;
             timeCount=0;
-        }
+        }*/
         switch(mode){
             case STORY_MODE.OVERRIDE_TRACKING:{
 

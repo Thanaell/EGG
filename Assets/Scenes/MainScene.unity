@@ -225,7 +225,7 @@ PrefabInstance:
     - target: {fileID: 8298269698017964132, guid: f80a9501a3cda474b82505ad9be8c733, type: 3}
       propertyPath: clip
       value: 
-      objectReference: {fileID: 7400000, guid: 37c2c8e7ac7d82740878dd15841b1542, type: 2}
+      objectReference: {fileID: 7400000, guid: cbef6ec49d455304d9fd159f69202157, type: 2}
     - target: {fileID: 8298269698017964132, guid: f80a9501a3cda474b82505ad9be8c733, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -399,7 +399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &628235729
 MonoBehaviour:
   m_ObjectHideFlags: 0
