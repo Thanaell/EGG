@@ -20,15 +20,20 @@ public class StoryController : MonoBehaviour
     public Animator externalAnimator;
     public Animator rootAnimator;
 
-    public GameObject ghostHandExternal;
+    public GameObject externalHand;
     public GameObject ghostHandRoot;
+    public GameObject overrideHand;
 
     public HandStateEvent handStateEvent;
+    public UnityEvent logEvent;
     
     private float timeCount;
     private HAND_STATE state;
 
     public STORY_MODE mode;
+
+    public SkinnedMeshRenderer overrideHandRenderer;
+    public SkinnedMeshRenderer mainHandRenderer;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,25 +45,31 @@ public class StoryController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         //0-10 : Tracking
-        //10-20 : Anim
+         //0-3 : Tracking only
+        //3-4 : Anim
+        // >4 Tracking
         if (timeCount>3 && state==HAND_STATE.TRACKING){
             handStateEvent.Invoke(HAND_STATE.ANIM);
             state=HAND_STATE.ANIM;         
         }
-        /*if (timeCount>20 && state==HAND_STATE.ANIM){
-            handStateEvent.Invoke(HAND_STATE.TRACKING);
-            state=HAND_STATE.TRACKING;
-            timeCount=0;
-        }*/
+
+        if (timeCount>6)
+        {
+            state = HAND_STATE.TRACKING;
+        }
+
+        if (state == HAND_STATE.ANIM)
+        {
+            logEvent.Invoke();
+        }
+       
         switch(mode){
             case STORY_MODE.OVERRIDE_TRACKING:{
-
                 ControlState(overrideAnimator);
                 break;
             }
             case STORY_MODE.GHOST_HAND_EXTERNAL:{
-                ControlState(externalAnimator, ghostHandExternal);
+                ControlState(externalAnimator, externalHand);
                 break;
             }
             case STORY_MODE.GHOST_HAND_ROOT:{
@@ -78,10 +89,20 @@ public class StoryController : MonoBehaviour
             if (ghostHand!=null){
                 ghostHand.SetActive(false);
             }
+            if (mode == STORY_MODE.OVERRIDE_TRACKING)
+            {
+                mainHandRenderer.enabled = true;
+                overrideHandRenderer.enabled = false;
+            }
         }
         if (state==HAND_STATE.ANIM && animator.enabled==false){
             if (ghostHand!=null){
                 ghostHand.SetActive(true);
+            }
+            if(mode == STORY_MODE.OVERRIDE_TRACKING)
+            {
+                mainHandRenderer.enabled=false;
+                overrideHandRenderer.enabled = true;
             }
             animator.enabled=true;            
         }
@@ -94,17 +115,17 @@ public class StoryController : MonoBehaviour
     void switchMode()  {
         switch(mode){
             case STORY_MODE.OVERRIDE_TRACKING:{
-                ghostHandExternal.SetActive(false);
+                externalHand.SetActive(false);
                 ghostHandRoot.SetActive(false);
                 break;
             }
             case STORY_MODE.GHOST_HAND_EXTERNAL:{
-                ghostHandExternal.SetActive(true);
+                externalHand.SetActive(true);
                 ghostHandRoot.SetActive(false);
                 break;
             }
             case STORY_MODE.GHOST_HAND_ROOT:{
-                ghostHandExternal.SetActive(false);
+                externalHand.SetActive(false);
                 ghostHandRoot.SetActive(true);
                 break;
             }
