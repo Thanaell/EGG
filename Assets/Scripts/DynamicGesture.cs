@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DynamicGesture", menuName = "ScriptableObjects/DynamicGesture", order = 2)]
 public class DynamicGesture : ScriptableObject
 {
-    public string name;
+    new public string name;
     [SerializeField]
     public List<StaticGesture> orderedKeyFrames;
     public float execTime;
