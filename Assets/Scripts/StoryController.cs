@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-public enum STORY_MODE{
+public enum SHOWING_TECHNIQUE{
     GHOST_HAND_ROOT, GHOST_HAND_EXTERNAL, OVERRIDE_TRACKING
 }
 public enum HAND_STATE{
@@ -30,7 +30,7 @@ public class StoryController : MonoBehaviour
     private float timeCount;
     private HAND_STATE state;
 
-    public STORY_MODE mode;
+    public SHOWING_TECHNIQUE mode;
 
     public SkinnedMeshRenderer overrideHandRenderer;
     public SkinnedMeshRenderer mainHandRenderer;
@@ -64,15 +64,15 @@ public class StoryController : MonoBehaviour
         }
        
         switch(mode){
-            case STORY_MODE.OVERRIDE_TRACKING:{
+            case SHOWING_TECHNIQUE.OVERRIDE_TRACKING:{
                 ControlState(overrideAnimator);
                 break;
             }
-            case STORY_MODE.GHOST_HAND_EXTERNAL:{
+            case SHOWING_TECHNIQUE.GHOST_HAND_EXTERNAL:{
                 ControlState(externalAnimator, externalHand);
                 break;
             }
-            case STORY_MODE.GHOST_HAND_ROOT:{
+            case SHOWING_TECHNIQUE.GHOST_HAND_ROOT:{
                 ControlState(rootAnimator, ghostHandRoot);
                 break;
             }
@@ -89,7 +89,7 @@ public class StoryController : MonoBehaviour
             if (ghostHand!=null){
                 ghostHand.SetActive(false);
             }
-            if (mode == STORY_MODE.OVERRIDE_TRACKING)
+            if (mode == SHOWING_TECHNIQUE.OVERRIDE_TRACKING)
             {
                 mainHandRenderer.enabled = true;
                 overrideHandRenderer.enabled = false;
@@ -99,7 +99,7 @@ public class StoryController : MonoBehaviour
             if (ghostHand!=null){
                 ghostHand.SetActive(true);
             }
-            if(mode == STORY_MODE.OVERRIDE_TRACKING)
+            if(mode == SHOWING_TECHNIQUE.OVERRIDE_TRACKING)
             {
                 mainHandRenderer.enabled=false;
                 overrideHandRenderer.enabled = true;
@@ -114,17 +114,17 @@ public class StoryController : MonoBehaviour
 
     void switchMode()  {
         switch(mode){
-            case STORY_MODE.OVERRIDE_TRACKING:{
+            case SHOWING_TECHNIQUE.OVERRIDE_TRACKING:{
                 externalHand.SetActive(false);
                 ghostHandRoot.SetActive(false);
                 break;
             }
-            case STORY_MODE.GHOST_HAND_EXTERNAL:{
+            case SHOWING_TECHNIQUE.GHOST_HAND_EXTERNAL:{
                 externalHand.SetActive(true);
                 ghostHandRoot.SetActive(false);
                 break;
             }
-            case STORY_MODE.GHOST_HAND_ROOT:{
+            case SHOWING_TECHNIQUE.GHOST_HAND_ROOT:{
                 externalHand.SetActive(false);
                 ghostHandRoot.SetActive(true);
                 break;

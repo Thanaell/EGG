@@ -29,6 +29,7 @@ public class UI_Elements
 
     public Image detectionMarker;
     public TMP_Text repetionsCounterText;
+    public TMP_Text instructionsText;
 }
 
 //two repetitions of the cycle per run. One for training, the other for real
@@ -41,7 +42,7 @@ public class StudyController : MonoBehaviour
 
     public UI_Elements UI;
 
-    private STORY_MODE showingTechnique;
+    private SHOWING_TECHNIQUE showingTechnique;
     private STUDY_STEP studyStep;
     private bool isTraining;
 
@@ -60,11 +61,6 @@ public class StudyController : MonoBehaviour
         studyStep = STUDY_STEP.IDLE;
         currentRepetition = 0;
 
-        UI.repeatGestureButton.enabled = false;
-        UI.tryGestureButton.enabled = false;
-        UI.repetionsCounterText.text = "hello world";
-        UI.detectionMarker.color = Color.green;
-
 
     //TODO : Story mode and gesture subset from CSV file (depending on participant number and modality number)
 }
@@ -76,38 +72,49 @@ void Update()
     }
     
     //Coroutines ?
+    public void StartIdle()
+    {
+        studyStep = STUDY_STEP.IDLE;
+
+        UI.showGestureButton.enabled = true;
+        UI.tryGestureButton.enabled = false;
+        UI.repeatGestureButton.enabled = false;
+
+        UI.detectionMarker.enabled = false;
+        UI.detectionMarker.color = Color.red;
+
+        UI.repetionsCounterText.enabled = false;
+        UI.repetionsCounterText.text = "0/10";
+
+        UI.instructionsText.text = "You're in idle";
+    }
+
     public void StartShowTechnique()
     {
+        studyStep = STUDY_STEP.SHOW_TECHNIQUE;
 
+        UI.tryGestureButton.enabled = true;
+
+        UI.instructionsText.text = "You're in show tech";
     }
 
     public void StartFirstPerform()
     {
+        studyStep = STUDY_STEP.FIRST_PERFORM;
 
+        UI.detectionMarker.enabled = true;
+
+        UI.instructionsText.text = "You're in try gesture";
     }
 
     public void StartRepetitions()
     {
+        studyStep = STUDY_STEP.REPETITIONS;
 
-    }
+        UI.showGestureButton.enabled = false;
+        UI.tryGestureButton.enabled = false;
+        UI.repetionsCounterText.enabled = true;
 
-    public void OnButtonPressed(STUDY_STEP stepToGo)
-    {
-        switch (stepToGo)
-        {
-            case STUDY_STEP.SHOW_TECHNIQUE:
-                StartShowTechnique();
-                break;
-            case STUDY_STEP.FIRST_PERFORM:
-                StartFirstPerform();
-                break;
-            case STUDY_STEP.REPETITIONS:
-                StartRepetitions();
-                break;
-            default:
-                Debug.Log("did not switch to an active mode. Should we really be here ?");
-                studyStep = STUDY_STEP.IDLE;
-                break;
-        }
+        UI.instructionsText.text = "You're in repetitions";
     }
 }
