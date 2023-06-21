@@ -50,11 +50,16 @@ public class StudyController : MonoBehaviour
 
     private SHOWING_TECHNIQUE showingTechnique;
     private STUDY_STEP studyStep;
+
     private bool isTraining;
+    private bool isExpectingGesture = false;
 
     private int maxRepetitions = 10;
-    private int currentRepetition;
-    private int gestureCount = 0;
+    private int currentRepetition = 0;
+    private int currentGestureIndex = 0;
+    
+    private float repetitionTimeout = 0f;
+    private float neutralTimeout = 0f;
 
     private GameObject usedHand;
     private Animator usedAnimator;
@@ -79,13 +84,44 @@ public class StudyController : MonoBehaviour
     void Update()
     {
         //TODO : handle log ?
+
+        if(studyStep == STUDY_STEP.REPETITIONS)
+        {
+            if(isExpectingGesture && Time.time > repetitionTimeout)
+            {
+                currentRepetition++;
+                isExpectingGesture = false;
+
+                neutralTimeout = Time.time + currentExpectedGesture.execTime;
+
+                UI.repetionsCounterText.text = currentRepetition.ToString() + "/10";
+                UI.instructionsText.text = "Go back in neutral position";
+                UI.detectionMarker.color = Color.red;
+            }
+
+            if(!isExpectingGesture && Time.time > neutralTimeout)
+            {
+                isExpectingGesture = true;
+
+                repetitionTimeout = Time.time + currentExpectedGesture.execTime;
+
+                UI.instructionsText.text = "Perform the gesture";
+                UI.detectionMarker.color = Color.red;
+            }
+
+            if(currentRepetition >= maxRepetitions)
+            {
+                StartIdle();
+            }
+        }
     }
     
-    //Coroutines ?
     public void StartIdle()
     {
         studyStep = STUDY_STEP.IDLE;
-        gestureCount++;
+        currentGestureIndex++;
+
+        currentRepetition = 0;
 
         UI.showGestureButton.enabled = true;
         UI.tryGestureButton.enabled = false;
@@ -99,7 +135,7 @@ public class StudyController : MonoBehaviour
 
         UI.instructionsText.text = "You're in idle";
 
-        currentExpectedGesture = dynamicGestures[gestureCount - 1];
+        currentExpectedGesture = dynamicGestures[currentGestureIndex - 1];
     }
 
     public void StartShowTechnique()
@@ -140,7 +176,10 @@ public class StudyController : MonoBehaviour
         UI.repetionsCounterText.enabled = true;
         UI.detectionMarker.color = Color.red;
 
-        UI.instructionsText.text = "You're in repetitions";
+        UI.instructionsText.text = "Go back in neutral position";
+
+        isExpectingGesture = false;
+        neutralTimeout = Time.time + currentExpectedGesture.execTime;
     }
 
     public void OnRecognizeEvent(DynamicGesture detectedGesture)
@@ -160,10 +199,19 @@ public class StudyController : MonoBehaviour
                 }
                 break;
             case STUDY_STEP.REPETITIONS:
-                // Log recognize event if correct one
-                // Change detection marker
-                // Increase repetition time
-                // Reset timeout
+                if(isExpectingGesture)
+                {
+                    // Log recognize event if correct one
+                    // Change detection marker
+                    currentRepetition++;
+                    isExpectingGesture = false;
+
+                    neutralTimeout = Time.time + currentExpectedGesture.execTime;
+
+                    UI.repetionsCounterText.text = currentRepetition.ToString() + "/10";
+                    UI.instructionsText.text = "Go back in neutral position";
+                    UI.detectionMarker.color = Color.green;
+                }
                 break;
         }
     }
