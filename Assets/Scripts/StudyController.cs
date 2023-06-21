@@ -143,21 +143,24 @@ public class StudyController : MonoBehaviour
         UI.instructionsText.text = "You're in repetitions";
     }
 
-    public void OnRecognizeEvent()
+    public void OnRecognizeEvent(DynamicGesture detectedGesture)
     {
         switch(studyStep)
         {
             case STUDY_STEP.IDLE:
                 break;
             case STUDY_STEP.SHOW_TECHNIQUE:
-                // Log recognize event
+                // Log recognize event if correct one
                 break;
             case STUDY_STEP.FIRST_PERFORM:
-                // Log recognize event
-                UI.detectionMarker.color = Color.green;
+                // Log recognize event if correct one
+                if(detectedGesture.name == currentExpectedGesture.name)
+                {
+                    UI.detectionMarker.color = Color.green;
+                }
                 break;
             case STUDY_STEP.REPETITIONS:
-                // Log recognize event
+                // Log recognize event if correct one
                 // Change detection marker
                 // Increase repetition time
                 // Reset timeout
