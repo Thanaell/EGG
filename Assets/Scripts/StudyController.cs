@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,15 +43,21 @@ public class StudyController : MonoBehaviour
 
     public UI_Elements UI;
 
+    public List<DynamicGesture> dynamicGestures;
+
     private SHOWING_TECHNIQUE showingTechnique;
     private STUDY_STEP studyStep;
     private bool isTraining;
 
     private int maxRepetitions = 10;
     private int currentRepetition;
+    private int gestureCount = 0;
 
     private GameObject usedHand;
     private Animator usedAnimator;
+
+    private DynamicGesture currentExpectedGesture;
+    //private Animation currentExpectedGestureAnimation;
 
     
 
@@ -61,12 +68,16 @@ public class StudyController : MonoBehaviour
         studyStep = STUDY_STEP.IDLE;
         currentRepetition = 0;
 
+        //TODO : Story mode and gesture subset from CSV file (depending on participant number and modality number)
 
-    //TODO : Story mode and gesture subset from CSV file (depending on participant number and modality number)
-}
+        // temp animator
+        usedAnimator = hands.overrideAnimator;
 
-// Update is called once per frame
-void Update()
+        StartIdle();
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         //TODO : handle log ?
     }
@@ -75,6 +86,7 @@ void Update()
     public void StartIdle()
     {
         studyStep = STUDY_STEP.IDLE;
+        gestureCount++;
 
         UI.showGestureButton.enabled = true;
         UI.tryGestureButton.enabled = false;
@@ -87,6 +99,11 @@ void Update()
         UI.repetionsCounterText.text = "0/10";
 
         UI.instructionsText.text = "You're in idle";
+
+        currentExpectedGesture = dynamicGestures[gestureCount - 1];
+
+        //string[] animationPath = AssetDatabase.FindAssets(currentExpectedGesture.name, new[] { "Assets/AnimationClips" });
+        //currentExpectedGestureAnimation = (Animation)AssetDatabase.LoadAssetAtPath(animationPath[0], typeof(Animation));
     }
 
     public void StartShowTechnique()
@@ -96,6 +113,11 @@ void Update()
         UI.tryGestureButton.enabled = true;
 
         UI.instructionsText.text = "You're in show tech";
+
+        hands.overrideHand.SetActive(true);
+
+        usedAnimator.enabled = true;
+        usedAnimator.Play(currentExpectedGesture.name);
     }
 
     public void StartFirstPerform()
@@ -105,6 +127,9 @@ void Update()
         UI.detectionMarker.enabled = true;
 
         UI.instructionsText.text = "You're in try gesture";
+
+        usedAnimator.enabled = false;
+        hands.overrideHand.SetActive(false);
     }
 
     public void StartRepetitions()
