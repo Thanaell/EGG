@@ -17,6 +17,9 @@ public class HandsAndAnimators
     public Animator externalAnimator;
     public Animator ghostAnimator;
 
+    public GameObject mainHand;
+    public SkinnedMeshRenderer mainHandRenderer;
+
     public GameObject externalHand;
     public GameObject ghostHand;
     public GameObject overrideHand;
@@ -57,11 +60,8 @@ public class StudyController : MonoBehaviour
     private Animator usedAnimator;
 
     private DynamicGesture currentExpectedGesture;
-    //private Animation currentExpectedGestureAnimation;
-
     
 
-    // Start is called before the first frame update
     void Start()
     {
         isTraining = true;
@@ -76,7 +76,6 @@ public class StudyController : MonoBehaviour
         StartIdle();
     }
 
-    // Update is called once per frame
     void Update()
     {
         //TODO : handle log ?
@@ -101,9 +100,6 @@ public class StudyController : MonoBehaviour
         UI.instructionsText.text = "You're in idle";
 
         currentExpectedGesture = dynamicGestures[gestureCount - 1];
-
-        //string[] animationPath = AssetDatabase.FindAssets(currentExpectedGesture.name, new[] { "Assets/AnimationClips" });
-        //currentExpectedGestureAnimation = (Animation)AssetDatabase.LoadAssetAtPath(animationPath[0], typeof(Animation));
     }
 
     public void StartShowTechnique()
@@ -114,6 +110,7 @@ public class StudyController : MonoBehaviour
 
         UI.instructionsText.text = "You're in show tech";
 
+        hands.mainHandRenderer.enabled = false;
         hands.overrideHand.SetActive(true);
 
         usedAnimator.enabled = true;
@@ -130,6 +127,8 @@ public class StudyController : MonoBehaviour
 
         usedAnimator.enabled = false;
         hands.overrideHand.SetActive(false);
+
+        hands.mainHandRenderer.enabled = true;
     }
 
     public void StartRepetitions()
@@ -139,7 +138,30 @@ public class StudyController : MonoBehaviour
         UI.showGestureButton.enabled = false;
         UI.tryGestureButton.enabled = false;
         UI.repetionsCounterText.enabled = true;
+        UI.detectionMarker.color = Color.red;
 
         UI.instructionsText.text = "You're in repetitions";
+    }
+
+    public void OnRecognizeEvent()
+    {
+        switch(studyStep)
+        {
+            case STUDY_STEP.IDLE:
+                break;
+            case STUDY_STEP.SHOW_TECHNIQUE:
+                // Log recognize event
+                break;
+            case STUDY_STEP.FIRST_PERFORM:
+                // Log recognize event
+                UI.detectionMarker.color = Color.green;
+                break;
+            case STUDY_STEP.REPETITIONS:
+                // Log recognize event
+                // Change detection marker
+                // Increase repetition time
+                // Reset timeout
+                break;
+        }
     }
 }
