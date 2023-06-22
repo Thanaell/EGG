@@ -5,7 +5,7 @@ using UnityEngine;
 using System;
 using Unity.VisualScripting;
 
-public class Logger : MonoBehaviour
+public class HandLogger : MonoBehaviour
 {
 
     [Header("Hand Skeleton")]
@@ -54,7 +54,19 @@ public class Logger : MonoBehaviour
     }
 
 
-    public void writeDataToCSV()
+    public void WriteDataToCSV(
+        int participantNumber, 
+        int modalityNumber,
+        SHOWING_TECHNIQUE showTechnique, 
+        float timeStamp, 
+        bool isTraining, 
+        STUDY_STEP studyStep,
+        bool isAnim,
+        int currentRepetitionNumber,
+        int showGestureRepeats,
+        string currentExpectedGestureName,
+        string detectedGestureName
+        )
     {
         Debug.Log("writing data");
         // we create also a new list of Vector 3
@@ -70,9 +82,13 @@ public class Logger : MonoBehaviour
         }
 
         string line = "";
+        line += string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};",
+                   participantNumber, modalityNumber, showTechnique, timeStamp, isTraining, studyStep, isAnim, 
+                   currentRepetitionNumber, showGestureRepeats, currentExpectedGestureName, detectedGestureName);
         foreach (Vector3 bonePosition in data)
         {
-            line += string.Format("{0};{1};{2};", bonePosition.x, bonePosition.y, bonePosition.z);
+            line += string.Format("{0};{1};{2};",
+                    bonePosition.x,bonePosition.y,bonePosition.z);
         }
         writer.WriteLine(line);
         writer.Flush();

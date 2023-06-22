@@ -173,6 +173,7 @@ MonoBehaviour:
   dynamicGestures:
   - {fileID: 11400000, guid: 80b84d538e982804381f94f8255ac56d, type: 2}
   - {fileID: 11400000, guid: bec9e75310b502345b9212f8d010eb9d, type: 2}
+  logger: {fileID: 726464491}
 --- !u!4 &188874846
 Transform:
   m_ObjectHideFlags: 0

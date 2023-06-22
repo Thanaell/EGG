@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,8 +39,8 @@ public class UI_Elements
 //two repetitions of the cycle per run. One for training, the other for real
 public class StudyController : MonoBehaviour
 {
-    public int participantNumber;
-    public int modalityNumber; //1, 2, 3
+    public int participantNumber = -1;
+    public int modalityNumber = -1; //1, 2, 3
 
     public HandsAndAnimators hands;
 
@@ -52,40 +52,69 @@ public class StudyController : MonoBehaviour
     private STUDY_STEP studyStep;
 
     private bool isTraining;
-    private bool isExpectingGesture = false;
+    private bool isAnim;
+    private bool isExpectingGesture;
 
     private int maxRepetitions = 10;
-    private int currentRepetition = 0;
-    private int currentGestureIndex = 0;
-    
-    private float repetitionTimeout = 0f;
-    private float neutralTimeout = 0f;
+    private int currentRepetition;
+    private int currentGestureIndex;
+    private int showGestureRepeats;
+
+    private float repetitionTimeout;
+    private float neutralTimeout;
 
     private GameObject usedHand;
     private Animator usedAnimator;
 
     private DynamicGesture currentExpectedGesture;
+
+    public HandLogger logger;
     
 
     void Start()
     {
         isTraining = true;
-        studyStep = STUDY_STEP.IDLE;
+        isAnim = false;
+        isExpectingGesture = false;
+
         currentRepetition = 0;
+        currentGestureIndex = 0;
+        showGestureRepeats = 0;
+
+        if(participantNumber == -1 || modalityNumber == -1)
+        {
+            Debug.Log("ERROR Participant or modality number not set");
+            Application.Quit();
+        }
+
+        repetitionTimeout = 0f;
+        neutralTimeout = 0f;
+
+        studyStep = STUDY_STEP.IDLE;
 
         //TODO : Story mode and gesture subset from CSV file (depending on participant number and modality number)
 
         // temp animator
         usedAnimator = hands.overrideAnimator;
+        usedHand = hands.overrideHand;
 
         StartIdle();
     }
 
     void Update()
     {
-        //TODO : handle log ?
+        //Log when
+            //Show technique, during animation
+            //Repetitions, when a gesture is expected
+            //First perform, before the first correct gesture
+        if (isAnim ||
+            isExpectingGesture||
+            (studyStep == STUDY_STEP.FIRST_PERFORM && UI.detectionMarker.color == Color.red))
+        {
+            Log();
+        }
 
-        if(studyStep == STUDY_STEP.REPETITIONS)
+        if (studyStep == STUDY_STEP.REPETITIONS)
         {
             if(isExpectingGesture && Time.time > repetitionTimeout)
             {
@@ -112,16 +141,26 @@ public class StudyController : MonoBehaviour
             if(currentRepetition >= maxRepetitions)
             {
                 StartIdle();
-            }
+            } 
         }
     }
-    
+    private void Log(string detectedGestureName="n/a")
+    {
+        logger.WriteDataToCSV(participantNumber, modalityNumber, showingTechnique, Time.time, isTraining, studyStep, isAnim,
+             currentRepetition, showGestureRepeats, currentExpectedGesture.name, detectedGestureName); //handlogger knows by itself the hand position
+                
+    }
     public void StartIdle()
     {
         studyStep = STUDY_STEP.IDLE;
         currentGestureIndex++;
-
         currentRepetition = 0;
+        showGestureRepeats = 0;
+
+        if (currentGestureIndex > 1)
+        {
+            isTraining = false;
+        }
 
         UI.showGestureButton.enabled = true;
         UI.tryGestureButton.enabled = false;
@@ -141,13 +180,15 @@ public class StudyController : MonoBehaviour
     public void StartShowTechnique()
     {
         studyStep = STUDY_STEP.SHOW_TECHNIQUE;
+        isAnim = true;
+        showGestureRepeats++;
 
         UI.tryGestureButton.enabled = true;
 
         UI.instructionsText.text = "You're in show tech";
 
         hands.mainHandRenderer.enabled = false;
-        hands.overrideHand.SetActive(true);
+        usedHand.SetActive(true);
 
         usedAnimator.enabled = true;
         usedAnimator.Play(currentExpectedGesture.name);
@@ -156,13 +197,14 @@ public class StudyController : MonoBehaviour
     public void StartFirstPerform()
     {
         studyStep = STUDY_STEP.FIRST_PERFORM;
+        isAnim = false;
 
         UI.detectionMarker.enabled = true;
 
         UI.instructionsText.text = "You're in try gesture";
 
         usedAnimator.enabled = false;
-        hands.overrideHand.SetActive(false);
+        usedHand.SetActive(false);
 
         hands.mainHandRenderer.enabled = true;
     }
@@ -170,6 +212,7 @@ public class StudyController : MonoBehaviour
     public void StartRepetitions()
     {
         studyStep = STUDY_STEP.REPETITIONS;
+        isAnim = false;
 
         UI.showGestureButton.enabled = false;
         UI.tryGestureButton.enabled = false;
@@ -189,11 +232,11 @@ public class StudyController : MonoBehaviour
             case STUDY_STEP.IDLE:
                 break;
             case STUDY_STEP.SHOW_TECHNIQUE:
-                // Log recognize event if correct one
+                Log(detectedGesture.name);
                 break;
             case STUDY_STEP.FIRST_PERFORM:
-                // Log recognize event if correct one
-                if(detectedGesture.name == currentExpectedGesture.name)
+                Log(detectedGesture.name);
+                if (detectedGesture.name == currentExpectedGesture.name)
                 {
                     UI.detectionMarker.color = Color.green;
                 }
@@ -201,16 +244,20 @@ public class StudyController : MonoBehaviour
             case STUDY_STEP.REPETITIONS:
                 if(isExpectingGesture)
                 {
-                    // Log recognize event if correct one
-                    // Change detection marker
-                    currentRepetition++;
-                    isExpectingGesture = false;
+                    Log(detectedGesture.name);
+                    if (detectedGesture.name == currentExpectedGesture.name)
+                    {
+                        // Change detection marker
+                        currentRepetition++;
+                        isExpectingGesture = false;
 
-                    neutralTimeout = Time.time + currentExpectedGesture.execTime;
+                        neutralTimeout = Time.time + currentExpectedGesture.execTime;
 
-                    UI.repetionsCounterText.text = currentRepetition.ToString() + "/10";
-                    UI.instructionsText.text = "Go back in neutral position";
-                    UI.detectionMarker.color = Color.green;
+                        UI.repetionsCounterText.text = currentRepetition.ToString() + "/10";
+                        UI.instructionsText.text = "Go back in neutral position";
+                        UI.detectionMarker.color = Color.green;
+                    }
+                    
                 }
                 break;
         }
