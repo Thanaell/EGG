@@ -5,11 +5,13 @@ using UnityEngine.Events;
 
 
 public enum SHOWING_TECHNIQUE{
-    GHOST_HAND_ROOT, GHOST_HAND_EXTERNAL, OVERRIDE_TRACKING
+    GHOST_HAND, EXTERNAL_HAND, OVERRIDE_HAND
 }
+
 public enum HAND_STATE{
     ANIM, TRACKING
 }
+
 [System.Serializable]
 public class HandStateEvent : UnityEvent<HAND_STATE>
 {
@@ -64,15 +66,15 @@ public class StoryController : MonoBehaviour
         }
        
         switch(mode){
-            case SHOWING_TECHNIQUE.OVERRIDE_TRACKING:{
+            case SHOWING_TECHNIQUE.OVERRIDE_HAND:{
                 ControlState(overrideAnimator);
                 break;
             }
-            case SHOWING_TECHNIQUE.GHOST_HAND_EXTERNAL:{
+            case SHOWING_TECHNIQUE.EXTERNAL_HAND:{
                 ControlState(externalAnimator, externalHand);
                 break;
             }
-            case SHOWING_TECHNIQUE.GHOST_HAND_ROOT:{
+            case SHOWING_TECHNIQUE.GHOST_HAND:{
                 ControlState(rootAnimator, ghostHandRoot);
                 break;
             }
@@ -89,7 +91,7 @@ public class StoryController : MonoBehaviour
             if (ghostHand!=null){
                 ghostHand.SetActive(false);
             }
-            if (mode == SHOWING_TECHNIQUE.OVERRIDE_TRACKING)
+            if (mode == SHOWING_TECHNIQUE.OVERRIDE_HAND)
             {
                 mainHandRenderer.enabled = true;
                 overrideHandRenderer.enabled = false;
@@ -99,7 +101,7 @@ public class StoryController : MonoBehaviour
             if (ghostHand!=null){
                 ghostHand.SetActive(true);
             }
-            if(mode == SHOWING_TECHNIQUE.OVERRIDE_TRACKING)
+            if(mode == SHOWING_TECHNIQUE.OVERRIDE_HAND)
             {
                 mainHandRenderer.enabled=false;
                 overrideHandRenderer.enabled = true;
@@ -114,17 +116,17 @@ public class StoryController : MonoBehaviour
 
     void switchMode()  {
         switch(mode){
-            case SHOWING_TECHNIQUE.OVERRIDE_TRACKING:{
+            case SHOWING_TECHNIQUE.OVERRIDE_HAND:{
                 externalHand.SetActive(false);
                 ghostHandRoot.SetActive(false);
                 break;
             }
-            case SHOWING_TECHNIQUE.GHOST_HAND_EXTERNAL:{
+            case SHOWING_TECHNIQUE.EXTERNAL_HAND:{
                 externalHand.SetActive(true);
                 ghostHandRoot.SetActive(false);
                 break;
             }
-            case SHOWING_TECHNIQUE.GHOST_HAND_ROOT:{
+            case SHOWING_TECHNIQUE.GHOST_HAND:{
                 externalHand.SetActive(false);
                 ghostHandRoot.SetActive(true);
                 break;

@@ -1,278 +1,304 @@
 {
-    "Participant1": {
-      "Modality1": {
-        "ShowTechnique": "OVERRIDE",
-        "GestureTraining": "Training1",
-        "GestureStatic": "Static1",
-        "GestureShort": "Short1",
-        "GestureLong": "Long1"
-      },
-      "Modality2": {
-        "ShowTechnique": "GHOST",
-        "GestureTraining": "Training2",
-        "GestureStatic": "Static2",
-        "GestureShort": "Short3",
-        "GestureLong": "Long2"
-      },
-      "Modality3": {
-        "ShowTechnique": "EXTERNAL",
-        "GestureTraining": "Training3",
-        "GestureStatic": "Static3",
-        "GestureShort": "Short2",
-        "GestureLong": "Long3"
-      }
-    },
-    "Participant2": {
-      "Modality1": {
-        "ShowTechnique": "OVERRIDE",
-        "GestureTraining": "Training1",
-        "GestureStatic": "Static1",
-        "GestureShort": "Short2",
-        "GestureLong": "Long2"
-      },
-      "Modality2": {
-        "ShowTechnique": "EXTERNAL",
-        "GestureTraining": "Training2",
-        "GestureStatic": "Static2",
-        "GestureShort": "Short1",
-        "GestureLong": "Long3"
-      },
-      "Modality3": {
-        "ShowTechnique": "GHOST",
-        "GestureTraining": "Training3",
-        "GestureStatic": "Static3",
-        "GestureShort": "Short3",
-        "GestureLong": "Long1"
-      }
-    },
-    "Participant3": {
-      "Modality1": {
-        "ShowTechnique": "GHOST",
-        "GestureTraining": "Training1",
-        "GestureStatic": "Static1",
-        "GestureShort": "Short3",
-        "GestureLong": "Long3"
-      },
-      "Modality2": {
-        "ShowTechnique": "EXTERNAL",
-        "GestureTraining": "Training2",
-        "GestureStatic": "Static2",
-        "GestureShort": "Short2",
-        "GestureLong": "Long2"
-      },
-      "Modality3": {
-        "ShowTechnique": "OVERRIDE",
-        "GestureTraining": "Training3",
-        "GestureStatic": "Static3",
-        "GestureShort": "Short1",
-        "GestureLong": "Long1"
-      }
-    },
-    "Participant4": {
-      "Modality1": {
-        "ShowTechnique": "GHOST",
-        "GestureTraining": "Training1",
-        "GestureStatic": "Static1",
-        "GestureShort": "Short1",
-        "GestureLong": "Long2"
-      },
-      "Modality2": {
-        "ShowTechnique": "OVERRIDE",
-        "GestureTraining": "Training2",
-        "GestureStatic": "Static2",
-        "GestureShort": "Short2",
-        "GestureLong": "Long1"
-      },
-      "Modality3": {
-        "ShowTechnique": "EXTERNAL",
-        "GestureTraining": "Training3",
-        "GestureStatic": "Static3",
-        "GestureShort": "Short3",
-        "GestureLong": "Long3"
-      }
-    },
-    "Participant5": {
-      "Modality1": {
-        "ShowTechnique": "EXTERNAL",
-        "GestureTraining": "Training1",
-        "GestureStatic": "Static2",
-        "GestureShort": "Short1",
-        "GestureLong": "Long2"
-      },
-      "Modality2": {
-        "ShowTechnique": "GHOST",
-        "GestureTraining": "Training2",
-        "GestureStatic": "Static1",
-        "GestureShort": "Short3",
-        "GestureLong": "Long1"
-      },
-      "Modality3": {
-        "ShowTechnique": "OVERRIDE",
-        "GestureTraining": "Training3",
-        "GestureStatic": "Static3",
-        "GestureShort": "Short2",
-        "GestureLong": "Long3"
-      }
-    },
-    "Participant6": {
-      "Modality1": {
-        "ShowTechnique": "EXTERNAL",
-        "GestureTraining": "Training1",
-        "GestureStatic": "Static2",
-        "GestureShort": "Short2",
-        "GestureLong": "Long3"
-      },
-      "Modality2": {
-        "ShowTechnique": "OVERRIDE",
-        "GestureTraining": "Training2",
-        "GestureStatic": "Static3",
-        "GestureShort": "Short1",
-        "GestureLong": "Long2"
-      },
-      "Modality3": {
-        "ShowTechnique": "GHOST",
-        "GestureTraining": "Training3",
-        "GestureStatic": "Static1",
-        "GestureShort": "Short3",
-        "GestureLong": "Long1"
-      }
-    },
-    "Participant7": {
-      "Modality1": {
-        "ShowTechnique": "OVERRIDE",
-        "GestureTraining": "Training1",
-        "GestureStatic": "Static2",
-        "GestureShort": "Short3",
-        "GestureLong": "Long1"
-      },
-      "Modality2": {
-        "ShowTechnique": "GHOST",
-        "GestureTraining": "Training2",
-        "GestureStatic": "Static3",
-        "GestureShort": "Short1",
-        "GestureLong": "Long2"
-      },
-      "Modality3": {
-        "ShowTechnique": "EXTERNAL",
-        "GestureTraining": "Training3",
-        "GestureStatic": "Static1",
-        "GestureShort": "Short2",
-        "GestureLong": "Long3"
-      }
-    },
-    "Participant8": {
-      "Modality1": {
-        "ShowTechnique": "OVERRIDE",
-        "GestureTraining": "Training1",
-        "GestureStatic": "Static2",
-        "GestureShort": "Short2",
-        "GestureLong": "Long3"
-      },
-      "Modality2": {
-        "ShowTechnique": "EXTERNAL",
-        "GestureTraining": "Training2",
-        "GestureStatic": "Static1",
-        "GestureShort": "Short1",
-        "GestureLong": "Long2"
-      },
-      "Modality3": {
-        "ShowTechnique": "GHOST",
-        "GestureTraining": "Training3",
-        "GestureStatic": "Static3",
-        "GestureShort": "Short3",
-        "GestureLong": "Long1"
-      }
-    },
-    "Participant9": {
-      "Modality1": {
-        "ShowTechnique": "GHOST",
-        "GestureTraining": "Training1",
-        "GestureStatic": "Static3",
-        "GestureShort": "Short1",
-        "GestureLong": "Long3"
-      },
-      "Modality2": {
-        "ShowTechnique": "EXTERNAL",
-        "GestureTraining": "Training2",
-        "GestureStatic": "Static1",
-        "GestureShort": "Short2",
-        "GestureLong": "Long1"
-      },
-      "Modality3": {
-        "ShowTechnique": "OVERRIDE",
-        "GestureTraining": "Training3",
-        "GestureStatic": "Static2",
-        "GestureShort": "Short3",
-        "GestureLong": "Long2"
-      }
-    },
-    "Participant10": {
-      "Modality1": {
-        "ShowTechnique": "GHOST",
-        "GestureTraining": "Training1",
-        "GestureStatic": "Static3",
-        "GestureShort": "Short2",
-        "GestureLong": "Long1"
-      },
-      "Modality2": {
-        "ShowTechnique": "OVERRIDE",
-        "GestureTraining": "Training2",
-        "GestureStatic": "Static2",
-        "GestureShort": "Short3",
-        "GestureLong": "Long2"
-      },
-      "Modality3": {
-        "ShowTechnique": "EXTERNAL",
-        "GestureTraining": "Training3",
-        "GestureStatic": "Static1",
-        "GestureShort": "Short1",
-        "GestureLong": "Long3"
-      }
-    },
-    "Participant11": {
-      "Modality1": {
-        "ShowTechnique": "EXTERNAL",
-        "GestureTraining": "Training1",
-        "GestureStatic": "Static3",
-        "GestureShort": "Short3",
-        "GestureLong": "Long2"
-      },
-      "Modality2": {
-        "ShowTechnique": "GHOST",
-        "GestureTraining": "Training2",
-        "GestureStatic": "Static1",
-        "GestureShort": "Short2",
-        "GestureLong": "Long3"
-      },
-      "Modality3": {
-        "ShowTechnique": "OVERRIDE",
-        "GestureTraining": "Training3",
-        "GestureStatic": "Static2",
-        "GestureShort": "Short1",
-        "GestureLong": "Long1"
-      }
-    },
-    "Participant12": {
-      "Modality1": {
-        "ShowTechnique": "EXTERNAL",
-        "GestureTraining": "Training1",
-        "GestureStatic": "Static3",
-        "GestureShort": "Short3",
-        "GestureLong": "Long1"
-      },
-      "Modality2": {
-        "ShowTechnique": "OVERRIDE",
-        "GestureTraining": "Training2",
-        "GestureStatic": "Static2",
-        "GestureShort": "Short1",
-        "GestureLong": "Long3"
-      },
-      "Modality3": {
-        "ShowTechnique": "GHOST",
-        "GestureTraining": "Training3",
-        "GestureStatic": "Static1",
-        "GestureShort": "Short2",
-        "GestureLong": "Long2"
-      }
-    }
-  }
+    "Participants": [
+        {
+            "Modalities": [
+                {
+                    "ShowTechnique": "OVERRIDE",
+                    "GestureTraining": "Training1",
+                    "GestureStatic": "Static1",
+                    "GestureShort": "Short1",
+                    "GestureLong": "Long1"
+                },
+                {
+                    "ShowTechnique": "GHOST",
+                    "GestureTraining": "Training2",
+                    "GestureStatic": "Static2",
+                    "GestureShort": "Short3",
+                    "GestureLong": "Long2"
+                },
+                {
+                    "ShowTechnique": "EXTERNAL",
+                    "GestureTraining": "Training3",
+                    "GestureStatic": "Static3",
+                    "GestureShort": "Short2",
+                    "GestureLong": "Long3"
+                }
+            ]
+        },
+        {
+            "Modalities": [
+                {
+                    "ShowTechnique": "OVERRIDE",
+                    "GestureTraining": "Training1",
+                    "GestureStatic": "Static1",
+                    "GestureShort": "Short2",
+                    "GestureLong": "Long2"
+                },
+                {
+                    "ShowTechnique": "EXTERNAL",
+                    "GestureTraining": "Training2",
+                    "GestureStatic": "Static2",
+                    "GestureShort": "Short1",
+                    "GestureLong": "Long3"
+                },
+                {
+                    "ShowTechnique": "GHOST",
+                    "GestureTraining": "Training3",
+                    "GestureStatic": "Static3",
+                    "GestureShort": "Short3",
+                    "GestureLong": "Long1"
+                }
+            ]
+        },
+        {
+            "Modalities": [
+                {
+                    "ShowTechnique": "GHOST",
+                    "GestureTraining": "Training1",
+                    "GestureStatic": "Static1",
+                    "GestureShort": "Short3",
+                    "GestureLong": "Long3"
+                },
+                {
+                    "ShowTechnique": "EXTERNAL",
+                    "GestureTraining": "Training2",
+                    "GestureStatic": "Static2",
+                    "GestureShort": "Short2",
+                    "GestureLong": "Long2"
+                },
+                {
+                    "ShowTechnique": "OVERRIDE",
+                    "GestureTraining": "Training3",
+                    "GestureStatic": "Static3",
+                    "GestureShort": "Short1",
+                    "GestureLong": "Long1"
+                }
+            ]
+        },
+        {
+            "Modalities": [
+                {
+                    "ShowTechnique": "GHOST",
+                    "GestureTraining": "Training1",
+                    "GestureStatic": "Static1",
+                    "GestureShort": "Short1",
+                    "GestureLong": "Long2"
+                },
+                {
+                    "ShowTechnique": "OVERRIDE",
+                    "GestureTraining": "Training2",
+                    "GestureStatic": "Static2",
+                    "GestureShort": "Short2",
+                    "GestureLong": "Long1"
+                },
+                {
+                    "ShowTechnique": "EXTERNAL",
+                    "GestureTraining": "Training3",
+                    "GestureStatic": "Static3",
+                    "GestureShort": "Short3",
+                    "GestureLong": "Long3"
+                }
+            ]
+        },
+        {
+            "Modalities": [
+                {
+                    "ShowTechnique": "EXTERNAL",
+                    "GestureTraining": "Training1",
+                    "GestureStatic": "Static2",
+                    "GestureShort": "Short1",
+                    "GestureLong": "Long2"
+                },
+                {
+                    "ShowTechnique": "GHOST",
+                    "GestureTraining": "Training2",
+                    "GestureStatic": "Static1",
+                    "GestureShort": "Short3",
+                    "GestureLong": "Long1"
+                },
+                {
+                    "ShowTechnique": "OVERRIDE",
+                    "GestureTraining": "Training3",
+                    "GestureStatic": "Static3",
+                    "GestureShort": "Short2",
+                    "GestureLong": "Long3"
+                }
+            ]
+        },
+        {
+            "Modalities": [
+                {
+                    "ShowTechnique": "EXTERNAL",
+                    "GestureTraining": "Training1",
+                    "GestureStatic": "Static2",
+                    "GestureShort": "Short2",
+                    "GestureLong": "Long3"
+                },
+                {
+                    "ShowTechnique": "OVERRIDE",
+                    "GestureTraining": "Training2",
+                    "GestureStatic": "Static3",
+                    "GestureShort": "Short1",
+                    "GestureLong": "Long2"
+                },
+                {
+                    "ShowTechnique": "GHOST",
+                    "GestureTraining": "Training3",
+                    "GestureStatic": "Static1",
+                    "GestureShort": "Short3",
+                    "GestureLong": "Long1"
+                }
+            ]
+        },
+        {
+            "Modalities": [
+                {
+                    "ShowTechnique": "OVERRIDE",
+                    "GestureTraining": "Training1",
+                    "GestureStatic": "Static2",
+                    "GestureShort": "Short3",
+                    "GestureLong": "Long1"
+                },
+                {
+                    "ShowTechnique": "GHOST",
+                    "GestureTraining": "Training2",
+                    "GestureStatic": "Static3",
+                    "GestureShort": "Short1",
+                    "GestureLong": "Long2"
+                },
+                {
+                    "ShowTechnique": "EXTERNAL",
+                    "GestureTraining": "Training3",
+                    "GestureStatic": "Static1",
+                    "GestureShort": "Short2",
+                    "GestureLong": "Long3"
+                }
+            ]
+        },
+        {
+            "Modalities": [
+                {
+                    "ShowTechnique": "OVERRIDE",
+                    "GestureTraining": "Training1",
+                    "GestureStatic": "Static2",
+                    "GestureShort": "Short2",
+                    "GestureLong": "Long3"
+                },
+                {
+                    "ShowTechnique": "EXTERNAL",
+                    "GestureTraining": "Training2",
+                    "GestureStatic": "Static1",
+                    "GestureShort": "Short1",
+                    "GestureLong": "Long2"
+                },
+                {
+                    "ShowTechnique": "GHOST",
+                    "GestureTraining": "Training3",
+                    "GestureStatic": "Static3",
+                    "GestureShort": "Short3",
+                    "GestureLong": "Long1"
+                }
+            ]
+        },
+        {
+            "Modalities": [
+                {
+                    "ShowTechnique": "GHOST",
+                    "GestureTraining": "Training1",
+                    "GestureStatic": "Static3",
+                    "GestureShort": "Short1",
+                    "GestureLong": "Long3"
+                },
+                {
+                    "ShowTechnique": "EXTERNAL",
+                    "GestureTraining": "Training2",
+                    "GestureStatic": "Static1",
+                    "GestureShort": "Short2",
+                    "GestureLong": "Long1"
+                },
+                {
+                    "ShowTechnique": "OVERRIDE",
+                    "GestureTraining": "Training3",
+                    "GestureStatic": "Static2",
+                    "GestureShort": "Short3",
+                    "GestureLong": "Long2"
+                }
+            ]
+        },
+        {
+            "Modalities": [
+                {
+                    "ShowTechnique": "GHOST",
+                    "GestureTraining": "Training1",
+                    "GestureStatic": "Static3",
+                    "GestureShort": "Short2",
+                    "GestureLong": "Long1"
+                },
+                {
+                    "ShowTechnique": "OVERRIDE",
+                    "GestureTraining": "Training2",
+                    "GestureStatic": "Static2",
+                    "GestureShort": "Short3",
+                    "GestureLong": "Long2"
+                },
+                {
+                    "ShowTechnique": "EXTERNAL",
+                    "GestureTraining": "Training3",
+                    "GestureStatic": "Static1",
+                    "GestureShort": "Short1",
+                    "GestureLong": "Long3"
+                }
+            ]
+        },
+        {
+            "Modalities": [
+                {
+                    "ShowTechnique": "EXTERNAL",
+                    "GestureTraining": "Training1",
+                    "GestureStatic": "Static3",
+                    "GestureShort": "Short3",
+                    "GestureLong": "Long2"
+                },
+                {
+                    "ShowTechnique": "GHOST",
+                    "GestureTraining": "Training2",
+                    "GestureStatic": "Static1",
+                    "GestureShort": "Short2",
+                    "GestureLong": "Long3"
+                },
+                {
+                    "ShowTechnique": "OVERRIDE",
+                    "GestureTraining": "Training3",
+                    "GestureStatic": "Static2",
+                    "GestureShort": "Short1",
+                    "GestureLong": "Long1"
+                }
+            ]
+        },
+        {
+            "Modalities": [
+                {
+                    "ShowTechnique": "EXTERNAL",
+                    "GestureTraining": "Training1",
+                    "GestureStatic": "Static3",
+                    "GestureShort": "Short3",
+                    "GestureLong": "Long1"
+                },
+                {
+                    "ShowTechnique": "OVERRIDE",
+                    "GestureTraining": "Training2",
+                    "GestureStatic": "Static2",
+                    "GestureShort": "Short1",
+                    "GestureLong": "Long3"
+                },
+                {
+                    "ShowTechnique": "GHOST",
+                    "GestureTraining": "Training3",
+                    "GestureStatic": "Static1",
+                    "GestureShort": "Short2",
+                    "GestureLong": "Long2"
+                }
+            ]
+        }
+    ]
+}
