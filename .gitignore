@@ -68,4 +68,3 @@ crashlytics-build.properties
 
 # Ignore most .csv files
 /*.csv
-!/Study1Story.csv
