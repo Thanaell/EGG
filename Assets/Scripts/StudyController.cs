@@ -42,28 +42,7 @@ public class UI_Elements
     public TMP_Text instructionsText;
 }
 
-[System.Serializable]
-public class Modality
-{
-    public string ShowTechnique;
-    public string GestureTraining;
-    public string GestureStatic;
-    public string GestureShort;
-    public string GestureLong;
-}
 
-[System.Serializable]
-public class Participant
-{
-    public List<Modality> Modalities;
-}
-
-
-[System.Serializable]
-public class StudyStory
-{
-    public List<Participant> Participants;
-}
 
 [System.Serializable]
 public struct Mapping
@@ -131,9 +110,7 @@ public class StudyController : MonoBehaviour
 
         studyStep = STUDY_STEP.IDLE;
 
-        StreamReader reader = new StreamReader("./Study1Story.json");
-        string jsonStudyStory = reader.ReadToEnd();
-        studyStory = JsonUtility.FromJson<StudyStory>(jsonStudyStory);
+        studyStory = JsonLoader.loadStudyStory("./Study1Story.json");
 
         Modality currentModality = studyStory.Participants[participantNumber - 1].Modalities[modalityNumber - 1];
 
@@ -160,6 +137,7 @@ public class StudyController : MonoBehaviour
         gestures.Add(FindGesture(currentModality.GestureStatic));
         gestures.Add(FindGesture(currentModality.GestureShort));
         gestures.Add(FindGesture(currentModality.GestureLong));
+
         
         StartIdle();
     }
@@ -223,7 +201,6 @@ public class StudyController : MonoBehaviour
         UI.instructionsText.text = "Perform the gesture";
         UI.detectionMarker.color = Color.red;
 
-        // FIXME fix unchecked downcast
         if (currentExpectedGesture is DynamicGesture)
         {
             repetitionTimeout = Time.time + ((DynamicGesture)currentExpectedGesture).execTime;
@@ -312,7 +289,6 @@ public class StudyController : MonoBehaviour
         OnGestureEnd(false);
     }
 
-    // TODO map static gesture detector event
     public void OnRecognizeEvent(Gesture detectedGesture)
     {
         switch(studyStep)
@@ -348,13 +324,10 @@ public class StudyController : MonoBehaviour
 
     private Gesture FindGesture(string gestureRef)
     {
-        Debug.Log("Looking for gesture called: " + gestureRef);
-
         foreach(Mapping mapping in gestureMapping)
         {
             if(mapping.refName == gestureRef)
             {
-                Debug.Log("Found gesture");
                 Debug.Log(mapping.gesture);
                 Debug.Log(mapping.gesture.name);
 
