@@ -196,6 +196,7 @@ MonoBehaviour:
   - refName: Long3
     gesture: {fileID: 11400000, guid: 80b84d538e982804381f94f8255ac56d, type: 2}
   logger: {fileID: 726464491}
+  jsonLoader: {fileID: 1903054068}
 --- !u!4 &188874846
 Transform:
   m_ObjectHideFlags: 0
@@ -1980,6 +1981,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 188874845}
+        m_TargetAssemblyTypeName: StudyController, Assembly-CSharp
+        m_MethodName: OnRecognizeEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
   threshold: 0.05
   skeleton: {fileID: 1570765581}
   gestures:
@@ -2213,6 +2226,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825087225}
   m_CullTransparentMesh: 1
+--- !u!1 &1903054067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1903054069}
+  - component: {fileID: 1903054068}
+  m_Layer: 0
+  m_Name: JsonLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1903054068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903054067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d230606097c5c54b98f59a2e8befb63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1903054069
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903054067}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.1358852, y: -0.4853635, z: 0.0053182393}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1995961311 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5586214435567091057, guid: 0231801f40253aa45b645149f57c4d2c, type: 3}

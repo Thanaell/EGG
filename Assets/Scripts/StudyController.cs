@@ -1,11 +1,14 @@
-using System;
-using System.Collections;
+
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+
+public enum SHOWING_TECHNIQUE
+{
+    GHOST_HAND, EXTERNAL_HAND, OVERRIDE_HAND
+}
 
 public enum STUDY_STEP
 {    

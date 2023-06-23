@@ -4,9 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-public enum SHOWING_TECHNIQUE{
-    GHOST_HAND, EXTERNAL_HAND, OVERRIDE_HAND
-}
 
 public enum HAND_STATE{
     ANIM, TRACKING
