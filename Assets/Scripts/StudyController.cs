@@ -33,10 +33,6 @@ public class HandsAndAnimators
 [System.Serializable]
 public class UI_Elements
 {
-    public Button showGestureButton;
-    public Button tryGestureButton;
-    public Button repeatGestureButton;
-
     public Image detectionMarker;
     public TMP_Text repetionsCounterText;
     public TMP_Text instructionsText;
@@ -230,10 +226,6 @@ public class StudyController : MonoBehaviour
             isTraining = false;
         }
 
-        UI.showGestureButton.enabled = true;
-        UI.tryGestureButton.enabled = false;
-        UI.repeatGestureButton.enabled = false;
-
         UI.detectionMarker.enabled = false;
         UI.detectionMarker.color = Color.red;
 
@@ -250,8 +242,6 @@ public class StudyController : MonoBehaviour
         studyStep = STUDY_STEP.SHOW_TECHNIQUE;
         isAnim = true;
         showGestureRepeats++;
-
-        UI.tryGestureButton.enabled = true;
 
         UI.instructionsText.text = "You're in show tech";
 
@@ -282,8 +272,6 @@ public class StudyController : MonoBehaviour
         studyStep = STUDY_STEP.REPETITIONS;
         isAnim = false;
 
-        UI.showGestureButton.enabled = false;
-        UI.tryGestureButton.enabled = false;
         UI.repetionsCounterText.enabled = true;
 
         OnGestureEnd(false);
