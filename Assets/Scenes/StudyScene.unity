@@ -167,6 +167,9 @@ MonoBehaviour:
     detectionMarker: {fileID: 253919480}
     repetionsCounterText: {fileID: 480067332}
     instructionsText: {fileID: 1037557001}
+    showButton: {fileID: 795965099}
+    tryButton: {fileID: 1060014265}
+    repeatButton: {fileID: 479413272}
   gestureMapping:
   - refName: Training1
     gesture: {fileID: 11400000, guid: f6aa29792799de54684f21762e070323, type: 2}
@@ -535,6 +538,11 @@ Animator:
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 137292928177639894, guid: 0231801f40253aa45b645149f57c4d2c, type: 3}
   m_PrefabInstance: {fileID: 723775943}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &479413272 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6234758941941786784, guid: 03d6928b90f4a164b95e5d9a9b230f1d, type: 3}
+  m_PrefabInstance: {fileID: 1940571846}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &480067330
 GameObject:
@@ -957,6 +965,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &795965099 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6234758941941786784, guid: 03d6928b90f4a164b95e5d9a9b230f1d, type: 3}
+  m_PrefabInstance: {fileID: 712912189}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &866587304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,7 +1088,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1198,6 +1211,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4058866ed7169d1468c1dcecd8d634dc, type: 3}
+--- !u!1 &1060014265 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6234758941941786784, guid: 03d6928b90f4a164b95e5d9a9b230f1d, type: 3}
+  m_PrefabInstance: {fileID: 1821751365}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1070333209
 GameObject:
   m_ObjectHideFlags: 0

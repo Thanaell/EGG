@@ -36,9 +36,11 @@ public class UI_Elements
     public Image detectionMarker;
     public TMP_Text repetionsCounterText;
     public TMP_Text instructionsText;
+
+    public GameObject showButton;
+    public GameObject tryButton;
+    public GameObject repeatButton;
 }
-
-
 
 [System.Serializable]
 public struct Mapping
@@ -98,6 +100,8 @@ public class StudyController : MonoBehaviour
             Debug.Log("ERROR Participant or modality number not set");
             Application.Quit();
         }
+
+        logger.CreateStreamWriter("./Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + ".csv");
 
         repetitionTimeout = 0f;
         neutralTimeout = 0f;
@@ -176,7 +180,7 @@ public class StudyController : MonoBehaviour
         isExpectingGesture = false;
 
         UI.repetionsCounterText.text = currentRepetition.ToString() + "/10";
-        UI.instructionsText.text = "Go back in neutral position";
+        UI.instructionsText.text = "Go to neutral position";
 
         if(isGestureRecognized)
         {
@@ -194,7 +198,7 @@ public class StudyController : MonoBehaviour
     {
         isExpectingGesture = true;
 
-        UI.instructionsText.text = "Perform the gesture";
+        UI.instructionsText.text = "Perform the gesture you saw";
         UI.detectionMarker.color = Color.red;
 
         if (currentExpectedGesture is DynamicGesture)
@@ -232,49 +236,81 @@ public class StudyController : MonoBehaviour
         UI.repetionsCounterText.enabled = false;
         UI.repetionsCounterText.text = "0/10";
 
-        UI.instructionsText.text = "You're in idle";
+        UI.instructionsText.text = "Press the first button to start";
+
+        UI.showButton.GetComponent<MeshRenderer>().material.color = Color.red;
+        UI.tryButton.GetComponent<MeshRenderer>().material.color = Color.grey;
+        UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.grey;
 
         currentExpectedGesture = gestures[currentGestureIndex - 1];
     }
 
     public void StartShowTechnique()
     {
-        studyStep = STUDY_STEP.SHOW_TECHNIQUE;
-        isAnim = true;
-        showGestureRepeats++;
+        if(studyStep != STUDY_STEP.REPETITIONS)
+        {
+            studyStep = STUDY_STEP.SHOW_TECHNIQUE;
+            isAnim = true;
+            showGestureRepeats++;
 
-        UI.instructionsText.text = "You're in show tech";
+            UI.instructionsText.text = "When you understand the gesture\npress the second button";
 
-        hands.mainHandRenderer.enabled = false;
-        usedHand.SetActive(true);
+            UI.showButton.GetComponent<MeshRenderer>().material.color = Color.grey;
+            UI.tryButton.GetComponent<MeshRenderer>().material.color = Color.red;
+            UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.grey;
 
-        usedAnimator.enabled = true;
-        usedAnimator.Play(currentExpectedGesture.name);
+            hands.mainHandRenderer.enabled = false;
+            usedHand.SetActive(true);
+
+            usedAnimator.enabled = true;
+            usedAnimator.Play(currentExpectedGesture.name);
+        }
     }
 
     public void StartFirstPerform()
     {
-        studyStep = STUDY_STEP.FIRST_PERFORM;
-        isAnim = false;
+        if(studyStep == STUDY_STEP.SHOW_TECHNIQUE)
+        {
+            studyStep = STUDY_STEP.FIRST_PERFORM;
+            isAnim = false;
 
-        UI.detectionMarker.enabled = true;
+            UI.detectionMarker.enabled = true;
 
-        UI.instructionsText.text = "You're in try gesture";
+            UI.instructionsText.text = "Perform the gesture\nYou can press the first button to see the gesture again";
 
-        usedAnimator.enabled = false;
-        usedHand.SetActive(false);
+            UI.showButton.GetComponent<MeshRenderer>().material.color = Color.red;
+            UI.tryButton.GetComponent<MeshRenderer>().material.color = Color.grey;
+            if(UI.detectionMarker.color == Color.green)
+            {
+                UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.red;
+            }
+            else
+            {
+                UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.grey;
+            }
 
-        hands.mainHandRenderer.enabled = true;
+            usedAnimator.enabled = false;
+            usedHand.SetActive(false);
+
+            hands.mainHandRenderer.enabled = true;
+        }
     }
 
     public void StartRepetitions()
     {
-        studyStep = STUDY_STEP.REPETITIONS;
-        isAnim = false;
+        if(studyStep == STUDY_STEP.FIRST_PERFORM)
+        {
+            studyStep = STUDY_STEP.REPETITIONS;
+            isAnim = false;
 
-        UI.repetionsCounterText.enabled = true;
+            UI.repetionsCounterText.enabled = true;
 
-        OnGestureEnd(false);
+            UI.showButton.GetComponent<MeshRenderer>().material.color = Color.grey;
+            UI.tryButton.GetComponent<MeshRenderer>().material.color = Color.grey;
+            UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.grey;
+
+            OnGestureEnd(false);
+        }
     }
 
     public void OnRecognizeEvent(Gesture detectedGesture)
@@ -290,7 +326,10 @@ public class StudyController : MonoBehaviour
                 Log(detectedGesture.name);
                 if (detectedGesture.name == currentExpectedGesture.name)
                 {
+                    UI.instructionsText.text = "When you feel confident press the third button";
+
                     UI.detectionMarker.color = Color.green;
+                    UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.red;
                 }
                 break;
             case STUDY_STEP.REPETITIONS:
@@ -316,9 +355,6 @@ public class StudyController : MonoBehaviour
         {
             if(mapping.refName == gestureRef)
             {
-                Debug.Log(mapping.gesture);
-                Debug.Log(mapping.gesture.name);
-
                 return mapping.gesture;
             }
         }

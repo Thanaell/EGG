@@ -33,7 +33,6 @@ public static class JsonLoader
     {
         StreamReader reader = new StreamReader(path);
         string jsonStudyStory = reader.ReadToEnd();
-        Debug.Log(jsonStudyStory);
         StudyStory studyStory = JsonUtility.FromJson<StudyStory>(jsonStudyStory);
         return studyStory;
     }

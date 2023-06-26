@@ -20,8 +20,6 @@ public class HandLogger : MonoBehaviour
         // When the Oculus hand had his time to initialize hand, with a simple coroutine i start a delay of
         // a function to initialize the script
         StartCoroutine(DelayRoutine(2.5f, Initialize));
-
-        writer = new StreamWriter("./bones.csv");
     }
 
     // Coroutine used for delay some function
@@ -42,17 +40,15 @@ public class HandLogger : MonoBehaviour
         fingerbones = new List<OVRBone>(skeleton.Bones);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnApplicationQuit()
     {
         writer.Close();
     }
 
+    public void CreateStreamWriter(string path)
+    {
+        writer = new StreamWriter(path);
+    }
 
     public void WriteDataToCSV(
         int participantNumber, 
@@ -68,7 +64,6 @@ public class HandLogger : MonoBehaviour
         string detectedGestureName
         )
     {
-        Debug.Log("writing data");
         // we create also a new list of Vector 3
         List<Vector3> data = new List<Vector3>();
 
@@ -92,6 +87,5 @@ public class HandLogger : MonoBehaviour
         }
         writer.WriteLine(line);
         writer.Flush();
-        Debug.Log("data flushed");
     }
 }
