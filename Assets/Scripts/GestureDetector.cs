@@ -12,9 +12,6 @@ public class GestureDetector : MonoBehaviour
     private int gestureCount=0;
 
     public UnityEvent<StaticGesture> onRecognized;
-    // How much accurate the recognize should be
-    [Header("Threshold value")]
-    public float threshold = 0.1f;
 
     // Add the component that refer to the skeleton hand ("OVRCustomHandPrefab_R" or "OVRCustomHandPrefab_L")
     [Header("Hand Skeleton")]
@@ -175,7 +172,7 @@ public class GestureDetector : MonoBehaviour
                 float distance = Vector3.Distance(currentData, gesture.fingerDatas[i]);
 
                 // if the distance is bigger respect the threshold
-                if (distance > threshold)
+                if (distance > gesture.threshold)
                 {
                     // then we discart it because or is another gesture or we made bad the gesture we wanted to do
                     isDiscarded = true;

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ComplexSeries
   m_EditorClassIdentifier: 
   name: ComplexSeries
+  threshold: 0.25
   orderedKeyFrames:
   - {fileID: 11400000, guid: 8360ab9b5d810d944a28f406ab1ca49e, type: 2}
   - {fileID: 11400000, guid: 88b1f3f7288c9e147a5cf3b06ddc261c, type: 2}
