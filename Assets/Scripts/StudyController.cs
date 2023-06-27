@@ -315,6 +315,7 @@ public class StudyController : MonoBehaviour
 
     public void OnRecognizeEvent(Gesture detectedGesture)
     {
+        Debug.Log(detectedGesture.name);
         switch(studyStep)
         {
             case STUDY_STEP.IDLE:

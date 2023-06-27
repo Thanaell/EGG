@@ -8,7 +8,7 @@ public class RecordAnimationClip : MonoBehaviour
     private GameObject objectToRecord;
     private GameObjectRecorder m_Recorder;
     public string objectName;
-    private int frameCount=0;
+    private int frameCount = 0;
     bool isRecording = false;
     void findObject()
     {
@@ -18,16 +18,17 @@ public class RecordAnimationClip : MonoBehaviour
     void LateUpdate()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space)){
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
             if (!isRecording)
             {
                 isRecording = true;
             }
             else
             {
-                OnDisable();
+                Save();
             }
-            
+
         }
         if (isRecording)
         {
@@ -58,7 +59,7 @@ public class RecordAnimationClip : MonoBehaviour
         }
     }
 
-    void OnDisable()
+    void Save()
     {
         if (clip == null)
             return;
@@ -70,4 +71,5 @@ public class RecordAnimationClip : MonoBehaviour
             Debug.Log(frameCount);
         }
     }
+
 }

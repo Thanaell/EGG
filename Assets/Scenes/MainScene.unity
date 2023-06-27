@@ -521,11 +521,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9792326}
   m_Enabled: 1
---- !u!1 &80552905 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3431235065381581033, guid: c0bd3b2e4a397fb43a68c71649604d31, type: 3}
-  m_PrefabInstance: {fileID: 3430525255397850694}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &100170356 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4897388692554662, guid: c6a74181d4000004887343fb87b3c53a, type: 3}
@@ -551,7 +546,7 @@ PrefabInstance:
     - target: {fileID: 8298269698017964132, guid: f80a9501a3cda474b82505ad9be8c733, type: 3}
       propertyPath: clip
       value: 
-      objectReference: {fileID: 7400000, guid: cbef6ec49d455304d9fd159f69202157, type: 2}
+      objectReference: {fileID: 7400000, guid: 7c7ad975fb6df6541953beeca8d39148, type: 2}
     - target: {fileID: 8298269698017964132, guid: f80a9501a3cda474b82505ad9be8c733, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -614,6 +609,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f80a9501a3cda474b82505ad9be8c733, type: 3}
+--- !u!1 &369072748 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1581749144712736, guid: e201a24a09e942042b93390d0444d728, type: 3}
+  m_PrefabInstance: {fileID: 1151475247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &399221508
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -746,8 +746,9 @@ MonoBehaviour:
   overrideAnimator: {fileID: 4779998533916767}
   externalAnimator: {fileID: 1834291696}
   rootAnimator: {fileID: 258506874}
-  ghostHandExternal: {fileID: 80552905}
+  externalHand: {fileID: 0}
   ghostHandRoot: {fileID: 606736123}
+  overrideHand: {fileID: 369072748}
   handStateEvent:
     m_PersistentCalls:
       m_Calls:
@@ -763,7 +764,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+  logEvent:
+    m_PersistentCalls:
+      m_Calls: []
   mode: 2
+  overrideHandRenderer: {fileID: 1324808459}
+  mainHandRenderer: {fileID: 137292928177639894}
 --- !u!4 &628235730
 Transform:
   m_ObjectHideFlags: 0
@@ -909,6 +915,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Override_Hand
       objectReference: {fileID: 0}
+    - target: {fileID: 1581749144712736, guid: e201a24a09e942042b93390d0444d728, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4766092344323370, guid: e201a24a09e942042b93390d0444d728, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -974,6 +984,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4562126893162318, guid: c6a74181d4000004887343fb87b3c53a, type: 3}
   m_PrefabInstance: {fileID: 1669852414}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1324808459 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 137292928833085638, guid: e201a24a09e942042b93390d0444d728, type: 3}
+  m_PrefabInstance: {fileID: 1151475247}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1364317722 stripped
 Transform:

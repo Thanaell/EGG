@@ -46,22 +46,11 @@ public class StoryController : MonoBehaviour
     {
          //0-3 : Tracking only
         //3-4 : Anim
-        // >4 Tracking
         if (timeCount>3 && state==HAND_STATE.TRACKING){
             handStateEvent.Invoke(HAND_STATE.ANIM);
             state=HAND_STATE.ANIM;         
         }
-
-        if (timeCount>6)
-        {
-            state = HAND_STATE.TRACKING;
-        }
-
-        if (state == HAND_STATE.ANIM)
-        {
-            logEvent.Invoke();
-        }
-       
+   
         switch(mode){
             case SHOWING_TECHNIQUE.OVERRIDE_HAND:{
                 ControlState(overrideAnimator);
