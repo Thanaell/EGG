@@ -77,6 +77,9 @@ public class StudyController : MonoBehaviour
     private int currentGestureIndex;
     private int showGestureRepeats;
 
+    private float timestampStartNewGesture;
+    private float timestampStartFirstPerform;
+    private float timestampStartRepetitions;
     private float repetitionTimeout;
     private float neutralTimeout;
 
@@ -85,7 +88,8 @@ public class StudyController : MonoBehaviour
 
     private Gesture currentExpectedGesture;
 
-    public HandLogger logger;
+    public HandLogger handLogger;
+    public MainDataLogger mainDataLogger;
 
     void Start()
     {
@@ -104,7 +108,8 @@ public class StudyController : MonoBehaviour
             Application.Quit();
         }
 
-        logger.CreateStreamWriter("./Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + ".csv");
+        handLogger.CreateStreamWriter("./Hand_Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + ".csv");
+        mainDataLogger.CreateStreamWriter("./Main_Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + ".csv");
 
         repetitionTimeout = 0f;
         neutralTimeout = 0f;
@@ -174,6 +179,9 @@ public class StudyController : MonoBehaviour
 
             if(currentRepetition >= maxRepetitions)
             {
+                // TODO add counters for successes in different phases
+                mainDataLogger.WriteDataToCSV(participantNumber, modalityNumber, showingTechnique, isTraining, showGestureRepeats, currentExpectedGesture.name, timestampStartFirstPerform - timestampStartNewGesture, timestampStartRepetitions - timestampStartFirstPerform, -1, -1, -1);
+
                 StartIdle();
             } 
         }
@@ -217,7 +225,7 @@ public class StudyController : MonoBehaviour
 
     private void Log(string detectedGestureName="n/a")
     {
-        logger.WriteDataToCSV(participantNumber, modalityNumber, showingTechnique, Time.time, isTraining, studyStep, isAnim,
+        handLogger.WriteDataToCSV(participantNumber, modalityNumber, showingTechnique, Time.time, isTraining, studyStep, isAnim,
              currentRepetition, showGestureRepeats, currentExpectedGesture.name, detectedGestureName); //handlogger knows by itself the hand position
                 
     }
@@ -228,6 +236,9 @@ public class StudyController : MonoBehaviour
         currentGestureIndex++;
         currentRepetition = 0;
         showGestureRepeats = 0;
+
+        timestampStartNewGesture = -1f;
+        timestampStartFirstPerform = -1f;
 
         if (currentGestureIndex > 1)
         {
@@ -255,6 +266,12 @@ public class StudyController : MonoBehaviour
     {
         if(studyStep != STUDY_STEP.REPETITIONS)
         {
+            // Setting the timestamp only the first time the button is pressed
+            if(timestampStartNewGesture < 0f)
+            {
+                timestampStartNewGesture = Time.time;
+            }
+
             studyStep = STUDY_STEP.SHOW_TECHNIQUE;
             isAnim = true;
             showGestureRepeats++;
@@ -277,6 +294,12 @@ public class StudyController : MonoBehaviour
     {
         if(studyStep == STUDY_STEP.SHOW_TECHNIQUE)
         {
+            // Setting the timestamp only the first time the button is pressed
+            if (timestampStartFirstPerform < 0f)
+            {
+                timestampStartFirstPerform = Time.time;
+            }
+
             studyStep = STUDY_STEP.FIRST_PERFORM;
             isAnim = false;
 
@@ -306,6 +329,8 @@ public class StudyController : MonoBehaviour
     {
         if(studyStep == STUDY_STEP.FIRST_PERFORM)
         {
+            timestampStartRepetitions = Time.time;
+
             studyStep = STUDY_STEP.REPETITIONS;
             isAnim = false;
 

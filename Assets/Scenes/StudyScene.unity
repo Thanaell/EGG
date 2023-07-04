@@ -195,7 +195,8 @@ MonoBehaviour:
     gesture: {fileID: 11400000, guid: f6aa29792799de54684f21762e070323, type: 2}
   - refName: Long3
     gesture: {fileID: 11400000, guid: e08db2dee3f2a7a4a94c70e5b13b7b45, type: 2}
-  logger: {fileID: 726464491}
+  handLogger: {fileID: 726464491}
+  mainDataLogger: {fileID: 726464493}
 --- !u!4 &188874846
 Transform:
   m_ObjectHideFlags: 0
@@ -938,6 +939,7 @@ GameObject:
   m_Component:
   - component: {fileID: 726464492}
   - component: {fileID: 726464491}
+  - component: {fileID: 726464493}
   m_Layer: 0
   m_Name: Logger
   m_TagString: Untagged
@@ -973,6 +975,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &726464493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726464490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9542814ff6791d479cc65ac38d41e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &795965099 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6234758941941786784, guid: 03d6928b90f4a164b95e5d9a9b230f1d, type: 3}
