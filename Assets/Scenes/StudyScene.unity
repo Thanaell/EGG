@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fef7c1992df511419808de9839daae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  participantNumber: 1
-  modalityNumber: 1
+  participantNumber: 2
+  modalityNumber: 3
   hands:
     overrideAnimator: {fileID: 900961126}
     externalAnimator: {fileID: 1144774443}
@@ -172,7 +172,7 @@ MonoBehaviour:
     repeatButton: {fileID: 479413272}
   gestureMapping:
   - refName: Training1
-    gesture: {fileID: 11400000, guid: e08db2dee3f2a7a4a94c70e5b13b7b45, type: 2}
+    gesture: {fileID: 11400000, guid: c2e608c854ff9c34ab558eebc5be079c, type: 2}
   - refName: Training2
     gesture: {fileID: 11400000, guid: 089b7974d65a1e04187823ac14a9fc97, type: 2}
   - refName: Training3
@@ -264,7 +264,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 698ba8abdd9b8d646b8e52e326b6f531, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -516,7 +516,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289791552}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 15}
+  m_LocalPosition: {x: 0, y: -2.05, z: 15}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -994,7 +994,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866587304}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.05, z: 0.5}
+  m_LocalPosition: {x: 0, y: -0.08, z: 0.5}
   m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
   m_ConstrainProportionsScale: 0
   m_Children:
