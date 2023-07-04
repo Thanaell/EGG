@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
@@ -69,6 +70,7 @@ public class StudyController : MonoBehaviour
     private bool isTraining;
     private bool isAnim;
     private bool isExpectingGesture;
+    private bool isFirstPerformDone;
 
     private int maxRepetitions = 10;
     private int currentRepetition;
@@ -90,6 +92,7 @@ public class StudyController : MonoBehaviour
         isTraining = true;
         isAnim = false;
         isExpectingGesture = false;
+        isFirstPerformDone = false;
 
         currentRepetition = 0;
         currentGestureIndex = 0;
@@ -150,8 +153,9 @@ public class StudyController : MonoBehaviour
             //First perform, before the first correct gesture
         if (isAnim ||
             isExpectingGesture||
-            (studyStep == STUDY_STEP.FIRST_PERFORM && UI.detectionMarker.color == Color.red))
+            (studyStep == STUDY_STEP.FIRST_PERFORM && !isFirstPerformDone))
         {
+            // FIXME maybe log all the time ?
             Log();
         }
 
@@ -230,6 +234,8 @@ public class StudyController : MonoBehaviour
             isTraining = false;
         }
 
+        isFirstPerformDone = false;
+
         UI.detectionMarker.enabled = false;
         UI.detectionMarker.color = Color.red;
 
@@ -280,7 +286,7 @@ public class StudyController : MonoBehaviour
 
             UI.showButton.GetComponent<MeshRenderer>().material.color = Color.red;
             UI.tryButton.GetComponent<MeshRenderer>().material.color = Color.grey;
-            if(UI.detectionMarker.color == Color.green)
+            if(isFirstPerformDone)
             {
                 UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.red;
             }
@@ -331,6 +337,8 @@ public class StudyController : MonoBehaviour
 
                     UI.detectionMarker.color = Color.green;
                     UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.red;
+
+                    StartCoroutine(WaitThenRed());
                 }
                 break;
             case STUDY_STEP.REPETITIONS:
@@ -363,5 +371,11 @@ public class StudyController : MonoBehaviour
         Debug.Log("Gesture ref was not found, when did you last question your life choices?");
 
         return null;
+    }
+
+    public IEnumerator WaitThenRed()
+    {
+        yield return new WaitForSeconds(2f);
+        UI.detectionMarker.color = Color.red;
     }
 }
