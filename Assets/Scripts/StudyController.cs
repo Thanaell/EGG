@@ -80,6 +80,9 @@ public class StudyController : MonoBehaviour
     private float timestampStartNewGesture;
     private float timestampStartFirstPerform;
     private float timestampStartRepetitions;
+    private int numberSuccessWhileShow;
+    private int numberSuccessWhileTry;
+    private int numberSuccessWhileRepeat;
     private float repetitionTimeout;
     private float neutralTimeout;
 
@@ -153,16 +156,19 @@ public class StudyController : MonoBehaviour
     void Update()
     {
         //Log when
-            //Show technique, during animation
-            //Repetitions, when a gesture is expected
-            //First perform, before the first correct gesture
-        if (isAnim ||
+        //Show technique, during animation
+        //Repetitions, when a gesture is expected
+        //First perform, before the first correct gesture
+        /*if (isAnim ||
             isExpectingGesture||
             (studyStep == STUDY_STEP.FIRST_PERFORM && !isFirstPerformDone))
         {
             // FIXME maybe log all the time ?
             Log();
-        }
+        }*/
+
+        //Trying with log each frame
+        HandLog();
 
         if (studyStep == STUDY_STEP.REPETITIONS)
         {
@@ -180,7 +186,7 @@ public class StudyController : MonoBehaviour
             if(currentRepetition >= maxRepetitions)
             {
                 // TODO add counters for successes in different phases
-                mainDataLogger.WriteDataToCSV(participantNumber, modalityNumber, showingTechnique, isTraining, showGestureRepeats, currentExpectedGesture.name, timestampStartFirstPerform - timestampStartNewGesture, timestampStartRepetitions - timestampStartFirstPerform, -1, -1, -1);
+                mainDataLogger.WriteDataToCSV(participantNumber, modalityNumber, showingTechnique, isTraining, showGestureRepeats, currentExpectedGesture.name, timestampStartFirstPerform - timestampStartNewGesture, timestampStartRepetitions - timestampStartFirstPerform, numberSuccessWhileShow, numberSuccessWhileTry, numberSuccessWhileRepeat);
 
                 StartIdle();
             } 
@@ -197,6 +203,7 @@ public class StudyController : MonoBehaviour
         if(isGestureRecognized)
         {
             UI.detectionMarker.color = Color.green;
+            numberSuccessWhileRepeat++;
         }
         else
         {
@@ -223,7 +230,7 @@ public class StudyController : MonoBehaviour
         }
     }
 
-    private void Log(string detectedGestureName="n/a")
+    private void HandLog(string detectedGestureName="n/a")
     {
         handLogger.WriteDataToCSV(participantNumber, modalityNumber, showingTechnique, Time.time, isTraining, studyStep, isAnim,
              currentRepetition, showGestureRepeats, currentExpectedGesture.name, detectedGestureName); //handlogger knows by itself the hand position
@@ -239,6 +246,9 @@ public class StudyController : MonoBehaviour
 
         timestampStartNewGesture = -1f;
         timestampStartFirstPerform = -1f;
+        numberSuccessWhileShow = 0;
+        numberSuccessWhileTry = 0;
+        numberSuccessWhileRepeat = 0;
 
         if (currentGestureIndex > 1)
         {
@@ -352,12 +362,18 @@ public class StudyController : MonoBehaviour
             case STUDY_STEP.IDLE:
                 break;
             case STUDY_STEP.SHOW_TECHNIQUE:
-                Log(detectedGesture.name);
-                break;
-            case STUDY_STEP.FIRST_PERFORM:
-                Log(detectedGesture.name);
+                HandLog(detectedGesture.name);
                 if (detectedGesture.name == currentExpectedGesture.name)
                 {
+                    numberSuccessWhileShow++;
+                }
+                    break;
+            case STUDY_STEP.FIRST_PERFORM:
+                HandLog(detectedGesture.name);
+                if (detectedGesture.name == currentExpectedGesture.name)
+                {
+                    numberSuccessWhileTry++;
+
                     UI.instructionsText.text = "When you feel confident press the third button";
 
                     UI.detectionMarker.color = Color.green;
@@ -369,7 +385,7 @@ public class StudyController : MonoBehaviour
             case STUDY_STEP.REPETITIONS:
                 if(isExpectingGesture)
                 {
-                    Log(detectedGesture.name);
+                    HandLog(detectedGesture.name);
                     if (detectedGesture.name == currentExpectedGesture.name)
                     {
                         // Change detection marker
