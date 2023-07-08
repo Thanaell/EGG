@@ -168,7 +168,10 @@ public class StudyController : MonoBehaviour
         }*/
 
         //Trying with log each frame
-        HandLog();
+        if (currentGestureIndex<=4){
+            HandLog();
+        }
+        
 
         if (studyStep == STUDY_STEP.REPETITIONS)
         {
@@ -239,37 +242,50 @@ public class StudyController : MonoBehaviour
 
     public void StartIdle()
     {
-        studyStep = STUDY_STEP.IDLE;
         currentGestureIndex++;
-        currentRepetition = 0;
-        showGestureRepeats = 0;
-
-        timestampStartNewGesture = -1f;
-        timestampStartFirstPerform = -1f;
-        numberSuccessWhileShow = 0;
-        numberSuccessWhileTry = 0;
-        numberSuccessWhileRepeat = 0;
-
-        if (currentGestureIndex > 1)
+        if (currentGestureIndex==5)
         {
-            isTraining = false;
+            //TO TEST
+            UI.instructionsText.text = "Please remove the headset";
+
+            UI.showButton.SetActive(false);
+            UI.tryButton.SetActive(false);
+            UI.repeatButton.SetActive(false);
         }
+        else
+        {
+            studyStep = STUDY_STEP.IDLE;
+            currentRepetition = 0;
+            showGestureRepeats = 0;
 
-        isFirstPerformDone = false;
+            timestampStartNewGesture = -1f;
+            timestampStartFirstPerform = -1f;
+            numberSuccessWhileShow = 0;
+            numberSuccessWhileTry = 0;
+            numberSuccessWhileRepeat = 0;
 
-        UI.detectionMarker.enabled = false;
-        UI.detectionMarker.color = Color.red;
+            if (currentGestureIndex > 1)
+            {
+                isTraining = false;
+            }
 
-        UI.repetionsCounterText.enabled = false;
-        UI.repetionsCounterText.text = "0/10";
+            isFirstPerformDone = false;
 
-        UI.instructionsText.text = "Press the first button to start";
+            UI.detectionMarker.enabled = false;
+            UI.detectionMarker.color = Color.red;
 
-        UI.showButton.GetComponent<MeshRenderer>().material.color = Color.red;
-        UI.tryButton.GetComponent<MeshRenderer>().material.color = Color.grey;
-        UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.grey;
+            UI.repetionsCounterText.enabled = false;
+            UI.repetionsCounterText.text = "0/10";
 
-        currentExpectedGesture = gestures[currentGestureIndex - 1];
+            UI.instructionsText.text = "Press the first button to start";
+
+            UI.showButton.GetComponent<MeshRenderer>().material.color = Color.red;
+            UI.tryButton.GetComponent<MeshRenderer>().material.color = Color.grey;
+            UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.grey;
+
+            currentExpectedGesture = gestures[currentGestureIndex - 1];
+        }
+        
     }
 
     public void StartShowTechnique()
