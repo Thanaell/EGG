@@ -83,8 +83,10 @@ public class StudyController : MonoBehaviour
     private int numberSuccessWhileShow;
     private int numberSuccessWhileTry;
     private int numberSuccessWhileRepeat;
+
     private float repetitionTimeout;
     private float neutralTimeout;
+    private float nextAnimPlayTimestamp;
 
     private GameObject usedHand;
     private Animator usedAnimator;
@@ -93,6 +95,9 @@ public class StudyController : MonoBehaviour
 
     public HandLogger handLogger;
     public MainDataLogger mainDataLogger;
+
+    // Customisable vars (eg. waiting time between show tech)
+    private float delayBetweenAnimations = 2f;
 
     void Start()
     {
@@ -116,6 +121,7 @@ public class StudyController : MonoBehaviour
 
         repetitionTimeout = 0f;
         neutralTimeout = 0f;
+        nextAnimPlayTimestamp = 0f;
 
         gestures = new List<Gesture>();
 
@@ -171,7 +177,20 @@ public class StudyController : MonoBehaviour
         if (currentGestureIndex<=4){
             HandLog();
         }
-        
+
+        if (studyStep == STUDY_STEP.SHOW_TECHNIQUE && nextAnimPlayTimestamp < Time.time)
+        {
+            isAnim = true;
+
+            if (showingTechnique == SHOWING_TECHNIQUE.OVERRIDE_HAND)
+            {
+                hands.mainHandRenderer.enabled = false;
+            }
+            usedHand.SetActive(true);
+            usedAnimator.Play(currentExpectedGesture.name);
+
+            StartCoroutine(SetNextAnimPlayTimestamp());
+        }
 
         if (studyStep == STUDY_STEP.REPETITIONS)
         {
@@ -188,9 +207,7 @@ public class StudyController : MonoBehaviour
 
             if(currentRepetition >= maxRepetitions)
             {
-                // TODO add counters for successes in different phases
                 mainDataLogger.WriteDataToCSV(participantNumber, modalityNumber, showingTechnique, isTraining, showGestureRepeats, currentExpectedGesture.name, timestampStartFirstPerform - timestampStartNewGesture, timestampStartRepetitions - timestampStartFirstPerform, numberSuccessWhileShow, numberSuccessWhileTry, numberSuccessWhileRepeat);
-
                 StartIdle();
             } 
         }
@@ -299,7 +316,6 @@ public class StudyController : MonoBehaviour
             }
 
             studyStep = STUDY_STEP.SHOW_TECHNIQUE;
-            isAnim = true;
             showGestureRepeats++;
 
             UI.instructionsText.text = "When you understand the gesture\npress the second button";
@@ -308,11 +324,8 @@ public class StudyController : MonoBehaviour
             UI.tryButton.GetComponent<MeshRenderer>().material.color = Color.red;
             UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.grey;
 
-            hands.mainHandRenderer.enabled = false;
-            usedHand.SetActive(true);
-
             usedAnimator.enabled = true;
-            usedAnimator.Play(currentExpectedGesture.name);
+            nextAnimPlayTimestamp = Time.time;
         }
     }
 
@@ -347,7 +360,10 @@ public class StudyController : MonoBehaviour
             usedAnimator.enabled = false;
             usedHand.SetActive(false);
 
-            hands.mainHandRenderer.enabled = true;
+            if (showingTechnique == SHOWING_TECHNIQUE.OVERRIDE_HAND)
+            {
+                hands.mainHandRenderer.enabled = true;
+            }
         }
     }
 
@@ -358,7 +374,6 @@ public class StudyController : MonoBehaviour
             timestampStartRepetitions = Time.time;
 
             studyStep = STUDY_STEP.REPETITIONS;
-            isAnim = false;
 
             UI.repetionsCounterText.enabled = true;
 
@@ -434,5 +449,19 @@ public class StudyController : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         UI.detectionMarker.color = Color.red;
+    }
+
+    private IEnumerator SetNextAnimPlayTimestamp()
+    {
+        yield return new WaitForEndOfFrame();
+
+        float currentClipLength = usedAnimator.GetCurrentAnimatorStateInfo(0).length;
+        nextAnimPlayTimestamp = Time.time + currentClipLength + delayBetweenAnimations;
+
+        yield return new WaitForSeconds(currentClipLength);
+
+        isAnim = false;
+        usedHand.SetActive(false);
+        hands.mainHandRenderer.enabled = true;
     }
 }
