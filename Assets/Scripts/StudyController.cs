@@ -161,20 +161,8 @@ public class StudyController : MonoBehaviour
 
     void Update()
     {
-        //Log when
-        //Show technique, during animation
-        //Repetitions, when a gesture is expected
-        //First perform, before the first correct gesture
-        /*if (isAnim ||
-            isExpectingGesture||
-            (studyStep == STUDY_STEP.FIRST_PERFORM && !isFirstPerformDone))
-        {
-            // FIXME maybe log all the time ?
-            Log();
-        }*/
-
-        //Trying with log each frame
-        if (currentGestureIndex<=4){
+        // Logging each frame
+        if (currentGestureIndex <= 4){
             HandLog();
         }
 
@@ -260,14 +248,16 @@ public class StudyController : MonoBehaviour
     public void StartIdle()
     {
         currentGestureIndex++;
-        if (currentGestureIndex==5)
+
+        if (currentGestureIndex >= 5)
         {
-            //TO TEST
+            studyStep = STUDY_STEP.IDLE;
+            
             UI.instructionsText.text = "Please remove the headset";
 
-            UI.showButton.SetActive(false);
-            UI.tryButton.SetActive(false);
-            UI.repeatButton.SetActive(false);
+            UI.showButton.transform.parent.gameObject.SetActive(false);
+            UI.tryButton.transform.parent.gameObject.SetActive(false);
+            UI.repeatButton.transform.parent.gameObject.SetActive(false);
         }
         else
         {
@@ -351,6 +341,7 @@ public class StudyController : MonoBehaviour
             if(isFirstPerformDone)
             {
                 UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.red;
+                UI.instructionsText.text = "When you feel confident press the third button";
             }
             else
             {
@@ -403,6 +394,7 @@ public class StudyController : MonoBehaviour
                 HandLog(detectedGesture.name);
                 if (detectedGesture.name == currentExpectedGesture.name)
                 {
+                    isFirstPerformDone = true;
                     numberSuccessWhileTry++;
 
                     UI.instructionsText.text = "When you feel confident press the third button";
