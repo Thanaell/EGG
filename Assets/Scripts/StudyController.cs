@@ -314,6 +314,9 @@ public class StudyController : MonoBehaviour
             UI.tryButton.GetComponent<MeshRenderer>().material.color = Color.red;
             UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.grey;
 
+            // Remove detection square on show
+            UI.detectionMarker.enabled = false;
+
             usedAnimator.enabled = true;
             nextAnimPlayTimestamp = Time.time;
         }
