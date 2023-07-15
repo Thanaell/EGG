@@ -84,7 +84,7 @@ public class StudyController : MonoBehaviour
     private int numberSuccessWhileTry;
     private int numberSuccessWhileRepeat;
 
-    private float repetitionTimeout;
+    private float gestureTimeout;
     private float neutralTimeout;
     private float nextAnimPlayTimestamp;
 
@@ -119,7 +119,7 @@ public class StudyController : MonoBehaviour
         handLogger.CreateStreamWriter("./Hand_Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + ".csv");
         mainDataLogger.CreateStreamWriter("./Main_Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + ".csv");
 
-        repetitionTimeout = 0f;
+        gestureTimeout = 0f;
         neutralTimeout = 0f;
         nextAnimPlayTimestamp = 0f;
 
@@ -180,11 +180,15 @@ public class StudyController : MonoBehaviour
             StartCoroutine(SetNextAnimPlayTimestamp());
         }
 
-        if (studyStep == STUDY_STEP.REPETITIONS)
+        if (studyStep == STUDY_STEP.REPETITIONS || studyStep == STUDY_STEP.FIRST_PERFORM)
         {
-            if(isExpectingGesture && Time.time > repetitionTimeout)
+            if(isExpectingGesture && Time.time > gestureTimeout)
             {
-                currentRepetition++;
+                if(studyStep == STUDY_STEP.REPETITIONS)
+                {
+                    currentRepetition++;
+                }
+
                 OnGestureEnd(false);
             }
 
@@ -211,7 +215,13 @@ public class StudyController : MonoBehaviour
         if(isGestureRecognized)
         {
             UI.detectionMarker.color = Color.green;
-            numberSuccessWhileRepeat++;
+            if(studyStep == STUDY_STEP.FIRST_PERFORM)
+            {
+                numberSuccessWhileTry++;
+            }
+            else if(studyStep == STUDY_STEP.REPETITIONS) {
+                numberSuccessWhileRepeat++;
+            }
         }
         else
         {
@@ -230,11 +240,11 @@ public class StudyController : MonoBehaviour
 
         if (currentExpectedGesture is DynamicGesture)
         {
-            repetitionTimeout = Time.time + ((DynamicGesture)currentExpectedGesture).execTime;
+            gestureTimeout = Time.time + ((DynamicGesture)currentExpectedGesture).execTime;
         }
         else
         {
-            repetitionTimeout = Time.time + 3f;
+            gestureTimeout = Time.time + 3f;
         }
     }
 
@@ -337,14 +347,12 @@ public class StudyController : MonoBehaviour
 
             UI.detectionMarker.enabled = true;
 
-            UI.instructionsText.text = "Perform the gesture\nYou can press the first button to see the gesture again";
-
             UI.showButton.GetComponent<MeshRenderer>().material.color = Color.red;
             UI.tryButton.GetComponent<MeshRenderer>().material.color = Color.grey;
-            if(isFirstPerformDone)
+
+            if (isFirstPerformDone)
             {
                 UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.red;
-                UI.instructionsText.text = "When you feel confident press the third button";
             }
             else
             {
@@ -358,6 +366,8 @@ public class StudyController : MonoBehaviour
             {
                 hands.mainHandRenderer.enabled = true;
             }
+
+            OnGestureEnd(false);
         }
     }
 
@@ -392,20 +402,15 @@ public class StudyController : MonoBehaviour
                 {
                     numberSuccessWhileShow++;
                 }
-                    break;
+                break;
             case STUDY_STEP.FIRST_PERFORM:
                 HandLog(detectedGesture.name);
                 if (detectedGesture.name == currentExpectedGesture.name)
                 {
                     isFirstPerformDone = true;
-                    numberSuccessWhileTry++;
-
-                    UI.instructionsText.text = "When you feel confident press the third button";
-
-                    UI.detectionMarker.color = Color.green;
                     UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.red;
 
-                    StartCoroutine(WaitThenRed());
+                    OnGestureEnd(true);
                 }
                 break;
             case STUDY_STEP.REPETITIONS:
@@ -414,12 +419,10 @@ public class StudyController : MonoBehaviour
                     HandLog(detectedGesture.name);
                     if (detectedGesture.name == currentExpectedGesture.name)
                     {
-                        // Change detection marker
                         currentRepetition++;
 
                         OnGestureEnd(true);
                     }
-                    
                 }
                 break;
         }
@@ -438,12 +441,6 @@ public class StudyController : MonoBehaviour
         Debug.Log("Gesture ref was not found, when did you last question your life choices?");
 
         return null;
-    }
-
-    public IEnumerator WaitThenRed()
-    {
-        yield return new WaitForSeconds(2f);
-        UI.detectionMarker.color = Color.red;
     }
 
     private IEnumerator SetNextAnimPlayTimestamp()
