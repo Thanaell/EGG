@@ -137,7 +137,7 @@ public class GestureDetector : MonoBehaviour
         // and in the end we will going to add this new gesture in our list of gestures
         gestures.Add(g);
 
-        UnityEditor.AssetDatabase.CreateAsset(g, "Assets/Gestures/Static/"+g.name+".asset");
+        UnityEditor.AssetDatabase.CreateAsset(g, "Assets/Gestures/Static/Frames/"+g.name+".asset");
         UnityEditor.AssetDatabase.SaveAssets();
         UnityEditor.AssetDatabase.Refresh();
 
