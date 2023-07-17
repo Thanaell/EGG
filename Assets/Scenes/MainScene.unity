@@ -133,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 8298269698017964132, guid: f80a9501a3cda474b82505ad9be8c733, type: 3}
       propertyPath: clip
       value: 
-      objectReference: {fileID: 7400000, guid: 7c7ad975fb6df6541953beeca8d39148, type: 2}
+      objectReference: {fileID: 7400000, guid: 17e110b297311e84c8c959392d1e8a93, type: 2}
     - target: {fileID: 8298269698017964132, guid: f80a9501a3cda474b82505ad9be8c733, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -192,7 +192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8396988548502156137, guid: f80a9501a3cda474b82505ad9be8c733, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f80a9501a3cda474b82505ad9be8c733, type: 3}
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e8079a1374e6042a18a48546b55f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: ApplePinch
+  animationName: 
   overrideAnimator: {fileID: 1681757326}
   overrideHand: {fileID: 1531092394}
 --- !u!4 &628235730
@@ -794,7 +794,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1431047212}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 070c300bb4d36cb49ba1ace01696b53c, type: 2}
   m_CullingMode: 0

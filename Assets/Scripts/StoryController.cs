@@ -14,6 +14,7 @@ public class StoryController : MonoBehaviour
 
     void Start()
     {
+        overrideAnimator.enabled = true;
         overrideAnimator.Play(animationName);
     }
 }
