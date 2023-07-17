@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67c9a668520eb5241a6211f0fe50440b, type: 3}
-  m_Name: Closed-Open-Hand
+  m_Name: BABY-ASL
   m_EditorClassIdentifier: 
-  name: Closed-Open-Hand
+  name: BABY-ASL
+  threshold: 0.1
   orderedKeyFrames:
-  - {fileID: 11400000, guid: 6cbd78233f7a13e4992b1e1c4bb1335a, type: 2}
-  - {fileID: 11400000, guid: 1c30fce4aa4877b4587b781dd71262d1, type: 2}
-  execTime: 3
+  - {fileID: 11400000, guid: a1de91fc181e6a14f9fda1daa2ed06ef, type: 2}
+  - {fileID: 11400000, guid: 3acad084fe8b57e468960a66f83cf4f5, type: 2}
+  - {fileID: 11400000, guid: 7d12897d85e0b9041b5c5f766d847676, type: 2}
+  - {fileID: 11400000, guid: 073fa866e781ab445b5033e8a412302a, type: 2}
+  execTime: 6

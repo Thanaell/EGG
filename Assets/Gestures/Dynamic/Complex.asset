@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67c9a668520eb5241a6211f0fe50440b, type: 3}
-  m_Name: MultiTouch
+  m_Name: Complex
   m_EditorClassIdentifier: 
-  name: MultiTouch
+  name: Complex
   threshold: 0.4
   orderedKeyFrames:
   - {fileID: 11400000, guid: cbb5a6e17ad450c4c9d17907d7b0b12e, type: 2}
