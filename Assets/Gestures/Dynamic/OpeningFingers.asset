@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: OpeningFingers
   m_EditorClassIdentifier: 
   name: OpeningFingers
+  threshold: 0.15
   orderedKeyFrames:
   - {fileID: 11400000, guid: 6aa48047c46ab644f911d2fbe34f0023, type: 2}
   - {fileID: 11400000, guid: 44ed7c2ad9ffae44797e5ecce582060d, type: 2}

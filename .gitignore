@@ -66,5 +66,3 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-# Ignore most .csv files
-/*.csv

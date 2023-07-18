@@ -116,8 +116,8 @@ public class StudyController : MonoBehaviour
             Application.Quit();
         }
 
-        handLogger.CreateStreamWriter("./Hand_Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + ".csv");
-        mainDataLogger.CreateStreamWriter("./Main_Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + ".csv");
+        handLogger.CreateStreamWriter("./StudyLogs/Hand_Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + ".csv");
+        mainDataLogger.CreateStreamWriter("./StudyLogs/Main_Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + ".csv");
 
         gestureTimeout = 0f;
         neutralTimeout = 0f;

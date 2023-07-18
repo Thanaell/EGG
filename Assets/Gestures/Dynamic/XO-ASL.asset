@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: XO-ASL
   m_EditorClassIdentifier: 
   name: XO-ASL
-  threshold: 0.1
+  threshold: 0.15
   orderedKeyFrames:
   - {fileID: 11400000, guid: 4c53ff6ce3a39db44ac2fb4fdaef775b, type: 2}
   - {fileID: 11400000, guid: 252b7ecfb7e8ee343b9f88a7320cb2a4, type: 2}
