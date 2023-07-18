@@ -103,7 +103,7 @@ public class StudyController : MonoBehaviour
     private float delayBetweenStaticDetection = 2f;
 
     private float neutralTimeoutDelay = 4f;
-    private float staticGestureDetectionDelay = 3f;
+    private float staticGestureDetectionDelay = 1.5f;
 
     void Start()
     {
