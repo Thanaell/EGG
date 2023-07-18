@@ -81,6 +81,7 @@ public class StudyController : MonoBehaviour
     private float timestampStartFirstPerform;
     private float timestampStartRepetitions;
     private int numberSuccessWhileShow;
+    private int numberGestureAskedWhileTry;
     private int numberSuccessWhileTry;
     private int numberSuccessWhileRepeat;
 
@@ -238,6 +239,11 @@ public class StudyController : MonoBehaviour
 
     private void OnNeutralEnd()
     {
+        if (studyStep == STUDY_STEP.FIRST_PERFORM)
+        {
+            numberGestureAskedWhileTry++;
+        }
+
         isExpectingGesture = true;
 
         UI.instructionsText.text = "Perform the gesture you saw";
@@ -264,7 +270,7 @@ public class StudyController : MonoBehaviour
     {
         if (currentGestureIndex != 0 && currentGestureIndex < 5)
         {
-            mainDataLogger.WriteDataToCSV(participantNumber, modalityNumber, showingTechnique, isTraining, showGestureRepeats, currentExpectedGesture.name, timestampStartFirstPerform - timestampStartNewGesture, timestampStartRepetitions - timestampStartFirstPerform, numberSuccessWhileShow, numberSuccessWhileTry, numberSuccessWhileRepeat);
+            mainDataLogger.WriteDataToCSV(participantNumber, modalityNumber, showingTechnique, isTraining, showGestureRepeats, currentExpectedGesture.name, timestampStartFirstPerform - timestampStartNewGesture, timestampStartRepetitions - timestampStartFirstPerform, numberSuccessWhileShow, numberGestureAskedWhileTry, numberSuccessWhileTry, numberSuccessWhileRepeat);
         }
 
         currentGestureIndex++;
@@ -288,6 +294,7 @@ public class StudyController : MonoBehaviour
             timestampStartNewGesture = -1f;
             timestampStartFirstPerform = -1f;
             numberSuccessWhileShow = 0;
+            numberGestureAskedWhileTry = 0;
             numberSuccessWhileTry = 0;
             numberSuccessWhileRepeat = 0;
 

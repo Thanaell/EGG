@@ -28,16 +28,18 @@ public class MainDataLogger : MonoBehaviour
         float timeBeforeTriggerSecondPhase,
         float timeBeforeTriggerThirdPhase,
         int numberOfSuccessInFirstPhase,
+        int numberGestureAskedWhileTry,
         int numberOfSuccessInSecondPhase,
         int numberOfSuccessInThirdPhase
     )
     {
         string line = "";
 
-        line += string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};",
+        line += string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};",
                    participantNumber, modalityNumber, showTechnique, gestureName, isTraining,
                    showGestureRepeats, timeBeforeTriggerSecondPhase, timeBeforeTriggerThirdPhase,
-                   numberOfSuccessInFirstPhase, numberOfSuccessInSecondPhase, numberOfSuccessInThirdPhase);
+                   numberOfSuccessInFirstPhase, numberGestureAskedWhileTry,
+                   numberOfSuccessInSecondPhase, numberOfSuccessInThirdPhase);
 
         writer.WriteLine(line);
         writer.Flush();
