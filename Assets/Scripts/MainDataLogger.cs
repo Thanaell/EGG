@@ -16,6 +16,12 @@ public class MainDataLogger : MonoBehaviour
     public void CreateStreamWriter(string path)
     {
         writer = new StreamWriter(path);
+
+        // Add first line with columns names
+        string line = "participantNb;modalityNb;showTechnique;gestureName;isTraining;showGestureRepeats;timeBeforeTriggerSecondPhase;timeBeforeTriggerThirdPhase;nbOfSuccessInFirstPhase;nbGestureAskedWhileTry;nbOfSuccessInSecondPhase;nbOfSuccessInThirdPhase";
+
+        writer.WriteLine(line);
+        writer.Flush();
     }
 
     public void WriteDataToCSV(

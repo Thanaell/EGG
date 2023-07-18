@@ -48,6 +48,11 @@ public class HandLogger : MonoBehaviour
     public void CreateStreamWriter(string path)
     {
         writer = new StreamWriter(path);
+
+        // Add first line with columns names
+        string line = "participantNb;modalityNb;showTechnique;timeStamp;isTraining;studyStep;isAnim;currentRepetitionNb;showGestureRepeats;currentExpectedGestureName;detectedGestureName;jointsPositions";
+        writer.WriteLine(line);
+        writer.Flush();
     }
 
     public void WriteDataToCSV(
