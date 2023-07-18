@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fef7c1992df511419808de9839daae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  participantNumber: 3
-  modalityNumber: 3
+  participantNumber: 1
+  modalityNumber: 1
   hands:
     overrideAnimator: {fileID: 900961126}
     externalAnimator: {fileID: 1144774443}
@@ -257,7 +257,7 @@ MonoBehaviour:
   - refName: Training1
     gesture: {fileID: 11400000, guid: ca35741f36393ae42b1063e91f3d7ffb, type: 2}
   - refName: Training2
-    gesture: {fileID: 11400000, guid: 089b7974d65a1e04187823ac14a9fc97, type: 2}
+    gesture: {fileID: 11400000, guid: bec9e75310b502345b9212f8d010eb9d, type: 2}
   - refName: Training3
     gesture: {fileID: 11400000, guid: c09c9019ac603164191476214c266283, type: 2}
   - refName: Static1
@@ -271,7 +271,7 @@ MonoBehaviour:
   - refName: Short2
     gesture: {fileID: 11400000, guid: 80b84d538e982804381f94f8255ac56d, type: 2}
   - refName: Short3
-    gesture: {fileID: 11400000, guid: bec9e75310b502345b9212f8d010eb9d, type: 2}
+    gesture: {fileID: 11400000, guid: 089b7974d65a1e04187823ac14a9fc97, type: 2}
   - refName: Long1
     gesture: {fileID: 11400000, guid: d92c8138bfd759a489068c8ab7005214, type: 2}
   - refName: Long2
