@@ -436,13 +436,16 @@ public class StudyController : MonoBehaviour
                 }
                 break;
             case STUDY_STEP.FIRST_PERFORM:
-                HandLog(detectedGesture.name);
-                if (detectedGesture.name == currentExpectedGesture.name)
+                if (isExpectingGesture)
                 {
-                    isFirstPerformDone = true;
-                    UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.red;
+                    HandLog(detectedGesture.name);
+                    if (detectedGesture.name == currentExpectedGesture.name)
+                    {
+                        isFirstPerformDone = true;
+                        UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.red;
 
-                    OnGestureEnd(true);
+                        OnGestureEnd(true);
+                    }
                 }
                 break;
             case STUDY_STEP.REPETITIONS:
