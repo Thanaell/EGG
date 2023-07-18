@@ -19,7 +19,7 @@ public class HandLogger : MonoBehaviour
     {
         // When the Oculus hand had his time to initialize hand, with a simple coroutine i start a delay of
         // a function to initialize the script
-        StartCoroutine(DelayRoutine(2.5f, Initialize));
+        StartCoroutine(DelayRoutine(2f, Initialize));
     }
 
     // Coroutine used for delay some function
@@ -64,6 +64,11 @@ public class HandLogger : MonoBehaviour
         string detectedGestureName
         )
     {
+        if (fingerbones == null)
+        {
+            return;
+        }
+
         // we create also a new list of Vector 3
         List<Vector3> data = new List<Vector3>();
 

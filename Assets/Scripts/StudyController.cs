@@ -84,6 +84,7 @@ public class StudyController : MonoBehaviour
     private int numberSuccessWhileTry;
     private int numberSuccessWhileRepeat;
 
+    private float nextStaticGestureDetectionTimestamp;
     private float gestureTimeout;
     private float neutralTimeout;
     private float nextAnimPlayTimestamp;
@@ -98,6 +99,10 @@ public class StudyController : MonoBehaviour
 
     // Customisable vars (eg. waiting time between show tech)
     private float delayBetweenAnimations = 2f;
+    private float delayBetweenStaticDetection = 2f;
+
+    private float neutralTimeoutDelay = 4f;
+    private float staticGestureDetectionDelay = 3f;
 
     void Start()
     {
@@ -119,6 +124,7 @@ public class StudyController : MonoBehaviour
         handLogger.CreateStreamWriter("./StudyLogs/Hand_Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + ".csv");
         mainDataLogger.CreateStreamWriter("./StudyLogs/Main_Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + ".csv");
 
+        nextStaticGestureDetectionTimestamp = 
         gestureTimeout = 0f;
         neutralTimeout = 0f;
         nextAnimPlayTimestamp = 0f;
@@ -199,7 +205,6 @@ public class StudyController : MonoBehaviour
 
             if(currentRepetition >= maxRepetitions)
             {
-                mainDataLogger.WriteDataToCSV(participantNumber, modalityNumber, showingTechnique, isTraining, showGestureRepeats, currentExpectedGesture.name, timestampStartFirstPerform - timestampStartNewGesture, timestampStartRepetitions - timestampStartFirstPerform, numberSuccessWhileShow, numberSuccessWhileTry, numberSuccessWhileRepeat);
                 StartIdle();
             } 
         }
@@ -228,7 +233,7 @@ public class StudyController : MonoBehaviour
             UI.detectionMarker.color = Color.red;
         }
         
-        neutralTimeout = Time.time + 4f;
+        neutralTimeout = Time.time + neutralTimeoutDelay;
     }
 
     private void OnNeutralEnd()
@@ -244,7 +249,7 @@ public class StudyController : MonoBehaviour
         }
         else
         {
-            gestureTimeout = Time.time + 3f;
+            gestureTimeout = Time.time + staticGestureDetectionDelay;
         }
     }
 
@@ -257,6 +262,11 @@ public class StudyController : MonoBehaviour
 
     public void StartIdle()
     {
+        if (currentGestureIndex != 0 && currentGestureIndex < 5)
+        {
+            mainDataLogger.WriteDataToCSV(participantNumber, modalityNumber, showingTechnique, isTraining, showGestureRepeats, currentExpectedGesture.name, timestampStartFirstPerform - timestampStartNewGesture, timestampStartRepetitions - timestampStartFirstPerform, numberSuccessWhileShow, numberSuccessWhileTry, numberSuccessWhileRepeat);
+        }
+
         currentGestureIndex++;
 
         if (currentGestureIndex >= 5)
@@ -280,6 +290,8 @@ public class StudyController : MonoBehaviour
             numberSuccessWhileShow = 0;
             numberSuccessWhileTry = 0;
             numberSuccessWhileRepeat = 0;
+
+            nextStaticGestureDetectionTimestamp = -1f;
 
             if (currentGestureIndex > 1)
             {
@@ -392,7 +404,20 @@ public class StudyController : MonoBehaviour
     public void OnRecognizeEvent(Gesture detectedGesture)
     {
         Debug.Log(detectedGesture.name);
-        switch(studyStep)
+
+        if (detectedGesture.name == currentExpectedGesture.name && currentExpectedGesture is StaticGesture)
+        {
+            if (Time.time > nextStaticGestureDetectionTimestamp)
+            {
+                nextStaticGestureDetectionTimestamp = Time.time + delayBetweenStaticDetection;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        switch (studyStep)
         {
             case STUDY_STEP.IDLE:
                 break;
@@ -414,7 +439,7 @@ public class StudyController : MonoBehaviour
                 }
                 break;
             case STUDY_STEP.REPETITIONS:
-                if(isExpectingGesture)
+                if (isExpectingGesture)
                 {
                     HandLog(detectedGesture.name);
                     if (detectedGesture.name == currentExpectedGesture.name)
