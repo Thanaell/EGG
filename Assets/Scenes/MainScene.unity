@@ -133,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 8298269698017964132, guid: f80a9501a3cda474b82505ad9be8c733, type: 3}
       propertyPath: clip
       value: 
-      objectReference: {fileID: 7400000, guid: 6662432f4d7a6c84d870ac8023e8f6ff, type: 2}
+      objectReference: {fileID: 7400000, guid: ed67e6120e1bc0d4a9b390f1810dda5c, type: 2}
     - target: {fileID: 8298269698017964132, guid: f80a9501a3cda474b82505ad9be8c733, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -192,7 +192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8396988548502156137, guid: f80a9501a3cda474b82505ad9be8c733, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f80a9501a3cda474b82505ad9be8c733, type: 3}
@@ -274,7 +274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &628235729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e8079a1374e6042a18a48546b55f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: XO-ASL
+  animationName: Complex
   overrideAnimator: {fileID: 1681757326}
   overrideHand: {fileID: 1531092394}
 --- !u!4 &628235730

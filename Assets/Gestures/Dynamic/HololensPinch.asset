@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: HololensPinch
   m_EditorClassIdentifier: 
   name: HololensPinch
+  threshold: 0.05
   orderedKeyFrames:
   - {fileID: 11400000, guid: 8e744c72f6785b547929536ccf0a96f4, type: 2}
   - {fileID: 11400000, guid: 724e61b9fdea0ea4899401d053f14e8a, type: 2}
