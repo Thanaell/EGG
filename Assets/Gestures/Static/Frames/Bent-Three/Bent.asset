@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Bent
   m_EditorClassIdentifier: 
   name: Bent
-  threshold: 0.1
   fingerDatas:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -39,3 +38,4 @@ MonoBehaviour:
   - {x: -0.09100211, y: -0.08462983, z: -0.004281819}
   - {x: -0.08685412, y: -0.081637055, z: 0.0054028705}
   - {x: -0.0848691, y: -0.07424571, z: 0.016344957}
+  threshold: 0.07

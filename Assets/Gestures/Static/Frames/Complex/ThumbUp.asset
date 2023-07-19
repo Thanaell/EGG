@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: ThumbUp
   m_EditorClassIdentifier: 
   name: ThumbUp
-  threshold: 0.1
   fingerDatas:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -39,3 +38,4 @@ MonoBehaviour:
   - {x: -0.0717829, y: -0.024101682, z: -0.009508818}
   - {x: -0.06766306, y: -0.022110129, z: 0.006083384}
   - {x: -0.06181039, y: -0.024274606, z: 0.01911296}
+  threshold: 0.15

@@ -103,7 +103,7 @@ public class StudyController : MonoBehaviour
     private float delayBetweenStaticDetection = 2f;
 
     private float neutralTimeoutDelay = 4f;
-    private float staticGestureDetectionDelay = 1.5f;
+    private float staticGestureTimeoutDelay = 3f;
 
     void Start()
     {
@@ -255,7 +255,7 @@ public class StudyController : MonoBehaviour
         }
         else
         {
-            gestureTimeout = Time.time + staticGestureDetectionDelay;
+            gestureTimeout = Time.time + staticGestureTimeoutDelay;
         }
     }
 
