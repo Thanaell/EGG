@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Fist
   m_EditorClassIdentifier: 
   name: Fist
-  threshold: 0.1
   fingerDatas:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -39,3 +38,4 @@ MonoBehaviour:
   - {x: -0.06573958, y: -0.023517076, z: -0.011112109}
   - {x: -0.05688496, y: -0.022900056, z: 0.0030127838}
   - {x: -0.052210562, y: -0.024713013, z: 0.017278045}
+  threshold: 0.15

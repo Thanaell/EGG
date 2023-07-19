@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   participantNumber: 3
-  modalityNumber: 3
+  modalityNumber: 1
   hands:
     overrideAnimator: {fileID: 900961126}
     externalAnimator: {fileID: 1144774443}
