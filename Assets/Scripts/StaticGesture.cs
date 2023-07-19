@@ -6,4 +6,5 @@ public class StaticGesture : Gesture
 {
     [SerializeField]
     public List<Vector3> fingerDatas;
+    public float threshold = 0.1f;
 }

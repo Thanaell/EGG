@@ -246,7 +246,7 @@ public class StudyController : MonoBehaviour
 
         isExpectingGesture = true;
 
-        UI.instructionsText.text = "Perform the gesture you saw";
+        UI.instructionsText.text = "Perform the gesture";
         UI.detectionMarker.color = Color.red;
 
         if (currentExpectedGesture is DynamicGesture)
