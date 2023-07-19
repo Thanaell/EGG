@@ -390,9 +390,9 @@ public class StudyController : MonoBehaviour
         }
     }
 
-    public void StartRepetitions()
+    public void StartRepetitions(bool isCalledFromKeypad = false)
     {
-        if(studyStep == STUDY_STEP.FIRST_PERFORM && isFirstPerformDone)
+        if(studyStep == STUDY_STEP.FIRST_PERFORM && (isFirstPerformDone || isCalledFromKeypad))
         {
             timestampStartRepetitions = Time.time;
 

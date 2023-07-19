@@ -25,7 +25,7 @@ public class InputController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Keypad3))
         {
-            studyController.StartRepetitions();
+            studyController.StartRepetitions(true);
         }
     }
 }
