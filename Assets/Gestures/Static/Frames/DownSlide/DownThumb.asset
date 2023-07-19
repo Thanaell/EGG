@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: DownThumb
   m_EditorClassIdentifier: 
   name: DownThumb
-  threshold: 0.1
   fingerDatas:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -39,3 +38,4 @@ MonoBehaviour:
   - {x: -0.18714981, y: -0.023294719, z: 0.015216827}
   - {x: -0.1750434, y: -0.029873809, z: 0.026026756}
   - {x: -0.14839573, y: -0.031223226, z: 0.030076608}
+  threshold: 0.13

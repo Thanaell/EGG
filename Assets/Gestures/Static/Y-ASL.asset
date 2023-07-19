@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Y-ASL
   m_EditorClassIdentifier: 
   name: Y-ASL
-  threshold: 0.1
   fingerDatas:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -39,3 +38,4 @@ MonoBehaviour:
   - {x: -0.057495896, y: -0.028480157, z: -0.009821467}
   - {x: -0.052097417, y: -0.031174522, z: 0.0017536953}
   - {x: -0.12988496, y: -0.06294206, z: 0.046182334}
+  threshold: 0.13

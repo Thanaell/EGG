@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: B2-ASL
   m_EditorClassIdentifier: 
   name: B2-ASL
-  threshold: 0.1
   fingerDatas:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -39,3 +38,4 @@ MonoBehaviour:
   - {x: -0.18736336, y: -0.028410975, z: -0.0024088025}
   - {x: -0.17616263, y: -0.027124338, z: 0.016096324}
   - {x: -0.14795241, y: -0.03288985, z: 0.030337274}
+  threshold: 0.15

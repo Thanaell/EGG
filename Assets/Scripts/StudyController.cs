@@ -392,7 +392,7 @@ public class StudyController : MonoBehaviour
 
     public void StartRepetitions()
     {
-        if(studyStep == STUDY_STEP.FIRST_PERFORM)
+        if(studyStep == STUDY_STEP.FIRST_PERFORM && isFirstPerformDone)
         {
             timestampStartRepetitions = Time.time;
 

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: LeftThumb
   m_EditorClassIdentifier: 
   name: LeftThumb
-  threshold: 0.1
   fingerDatas:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -39,3 +38,4 @@ MonoBehaviour:
   - {x: -0.18801728, y: -0.024871219, z: 0.005750224}
   - {x: -0.17534514, y: -0.030289859, z: 0.020630166}
   - {x: -0.14371337, y: -0.04389869, z: 0.027307391}
+  threshold: 0.11

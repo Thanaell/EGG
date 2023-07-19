@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Victory
   m_EditorClassIdentifier: 
   name: Victory
-  threshold: 0.1
   fingerDatas:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -39,3 +38,4 @@ MonoBehaviour:
   - {x: -0.18485954, y: -0.034983657, z: 0.002911359}
   - {x: -0.06979379, y: -0.057960786, z: 0.0031532198}
   - {x: -0.060916603, y: -0.051047556, z: 0.011460602}
+  threshold: 0.05
