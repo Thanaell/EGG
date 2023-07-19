@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fef7c1992df511419808de9839daae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  participantNumber: 1
-  modalityNumber: 1
+  participantNumber: 3
+  modalityNumber: 3
   hands:
     overrideAnimator: {fileID: 900961126}
     externalAnimator: {fileID: 1144774443}
