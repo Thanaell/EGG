@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fef7c1992df511419808de9839daae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  participantNumber: 1
+  participantNumber: 3
   modalityNumber: 1
   hands:
     overrideAnimator: {fileID: 900961126}
@@ -2293,7 +2293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2801521783738393032, guid: 03d6928b90f4a164b95e5d9a9b230f1d, type: 3}
       propertyPath: buttonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2801521783738393032, guid: 03d6928b90f4a164b95e5d9a9b230f1d, type: 3}
       propertyPath: buttonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target

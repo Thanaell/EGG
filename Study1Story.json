@@ -64,14 +64,14 @@
                     "GestureTraining": "Training2",
                     "GestureStatic": "Static2",
                     "GestureShort": "Short2",
-                    "GestureLong": "Long2"
+                    "GestureLong": "Long1"
                 },
                 {
                     "ShowTechnique": "OVERRIDE",
                     "GestureTraining": "Training3",
                     "GestureStatic": "Static3",
                     "GestureShort": "Short1",
-                    "GestureLong": "Long1"
+                    "GestureLong": "Long2"
                 }
             ]
         },
@@ -114,14 +114,14 @@
                     "GestureTraining": "Training2",
                     "GestureStatic": "Static1",
                     "GestureShort": "Short3",
-                    "GestureLong": "Long1"
+                    "GestureLong": "Long3"
                 },
                 {
                     "ShowTechnique": "OVERRIDE",
                     "GestureTraining": "Training3",
                     "GestureStatic": "Static3",
                     "GestureShort": "Short2",
-                    "GestureLong": "Long3"
+                    "GestureLong": "Long1"
                 }
             ]
         },
@@ -164,14 +164,14 @@
                     "GestureTraining": "Training2",
                     "GestureStatic": "Static3",
                     "GestureShort": "Short1",
-                    "GestureLong": "Long2"
+                    "GestureLong": "Long3"
                 },
                 {
                     "ShowTechnique": "EXTERNAL",
                     "GestureTraining": "Training3",
                     "GestureStatic": "Static1",
                     "GestureShort": "Short2",
-                    "GestureLong": "Long3"
+                    "GestureLong": "Long2"
                 }
             ]
         },
@@ -239,14 +239,14 @@
                     "GestureTraining": "Training2",
                     "GestureStatic": "Static2",
                     "GestureShort": "Short3",
-                    "GestureLong": "Long2"
+                    "GestureLong": "Long3"
                 },
                 {
                     "ShowTechnique": "EXTERNAL",
                     "GestureTraining": "Training3",
                     "GestureStatic": "Static1",
                     "GestureShort": "Short1",
-                    "GestureLong": "Long3"
+                    "GestureLong": "Long2"
                 }
             ]
         },
@@ -257,21 +257,21 @@
                     "GestureTraining": "Training1",
                     "GestureStatic": "Static3",
                     "GestureShort": "Short3",
-                    "GestureLong": "Long2"
+                    "GestureLong": "Long1"
                 },
                 {
                     "ShowTechnique": "GHOST",
                     "GestureTraining": "Training2",
                     "GestureStatic": "Static1",
                     "GestureShort": "Short2",
-                    "GestureLong": "Long3"
+                    "GestureLong": "Long2"
                 },
                 {
                     "ShowTechnique": "OVERRIDE",
                     "GestureTraining": "Training3",
                     "GestureStatic": "Static2",
                     "GestureShort": "Short1",
-                    "GestureLong": "Long1"
+                    "GestureLong": "Long3"
                 }
             ]
         },
