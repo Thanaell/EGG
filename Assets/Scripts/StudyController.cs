@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -122,8 +123,10 @@ public class StudyController : MonoBehaviour
             Application.Quit();
         }
 
-        handLogger.CreateStreamWriter("./StudyLogs/Hand_Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + ".csv");
-        mainDataLogger.CreateStreamWriter("./StudyLogs/Main_Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + ".csv");
+        double timeSinceUnixEpoch = Math.Floor((DateTime.UtcNow - DateTime.UnixEpoch).TotalSeconds);
+
+        handLogger.CreateStreamWriter("./StudyLogs/Hand_Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + "_" + timeSinceUnixEpoch.ToString() + ".csv");
+        mainDataLogger.CreateStreamWriter("./StudyLogs/Main_Participant" + participantNumber.ToString() + "_Modality" + modalityNumber.ToString() + "_" + timeSinceUnixEpoch.ToString() + ".csv");
 
         nextStaticGestureDetectionTimestamp = 
         gestureTimeout = 0f;
