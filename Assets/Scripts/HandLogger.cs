@@ -50,7 +50,7 @@ public class HandLogger : MonoBehaviour
         writer = new StreamWriter(path);
 
         // Add first line with columns names
-        string line = "participantNb;modalityNb;showTechnique;timeStamp;isTraining;studyStep;isAnim;currentRepetitionNb;showGestureRepeats;currentExpectedGestureName;detectedGestureName;jointsPositions";
+        string line = "participantNb;modalityNb;showTechnique;timeStamp;isTraining;isLerping;studyStep;isAnim;currentRepetitionNb;showGestureRepeats;currentExpectedGestureName;detectedGestureName;jointsPositions";
         writer.WriteLine(line);
         writer.Flush();
     }
@@ -60,7 +60,8 @@ public class HandLogger : MonoBehaviour
         int modalityNumber,
         SHOWING_TECHNIQUE showTechnique, 
         float timeStamp, 
-        bool isTraining, 
+        bool isTraining,
+        bool isLerping,
         STUDY_STEP studyStep,
         bool isAnim,
         int currentRepetitionNumber,
@@ -87,8 +88,8 @@ public class HandLogger : MonoBehaviour
         }
 
         string line = "";
-        line += string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};",
-                   participantNumber, modalityNumber, showTechnique, timeStamp, isTraining, studyStep, isAnim, 
+        line += string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};",
+                   participantNumber, modalityNumber, showTechnique, timeStamp, isTraining, isLerping, studyStep, isAnim, 
                    currentRepetitionNumber, showGestureRepeats, currentExpectedGestureName, detectedGestureName);
         foreach (Vector3 bonePosition in data)
         {

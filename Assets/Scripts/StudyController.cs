@@ -70,6 +70,8 @@ public class StudyController : MonoBehaviour
 
     private bool isTraining;
     private bool isAnim;
+    private bool isPreparingLerp;
+    private bool isLerping;
     private bool isExpectingGesture;
     private bool isFirstPerformDone;
 
@@ -90,6 +92,12 @@ public class StudyController : MonoBehaviour
     private float gestureTimeout;
     private float neutralTimeout;
     private float nextAnimPlayTimestamp;
+    private float lerpStartTime;
+
+    private List<Vector3> lerpStartPositions;
+    private List<Quaternion> lerpStartRotations;
+    private List<Vector3> lerpEndPositions;
+    private List<Quaternion> lerpEndRotations;
 
     private GameObject usedHand;
     private Animator usedAnimator;
@@ -100,16 +108,20 @@ public class StudyController : MonoBehaviour
     public MainDataLogger mainDataLogger;
 
     // Customisable vars (eg. waiting time between show tech)
-    private float delayBetweenAnimations = 2f;
+    private float delayBetweenAnimations = 3.5f;
     private float delayBetweenStaticDetection = 2f;
 
     private float neutralTimeoutDelay = 4f;
     private float staticGestureTimeoutDelay = 3f;
 
+    private float lerpDurationAfterShow = 0.2f;
+
     void Start()
     {
         isTraining = true;
         isAnim = false;
+        isPreparingLerp = false;
+        isLerping = false;
         isExpectingGesture = false;
         isFirstPerformDone = false;
 
@@ -240,6 +252,58 @@ public class StudyController : MonoBehaviour
         neutralTimeout = Time.time + neutralTimeoutDelay;
     }
 
+    private void LateUpdate()
+    {
+        if (isPreparingLerp)
+        {
+            isPreparingLerp = false;
+
+            isLerping = true;
+            lerpStartTime = Time.time;
+
+            lerpStartPositions = new List<Vector3>();
+            lerpStartRotations = new List<Quaternion>();
+            lerpEndPositions = new List<Vector3>();
+            lerpEndRotations = new List<Quaternion>();
+
+            OVRSkeleton overrideSkeleton = hands.overrideHand.GetComponent<OVRSkeleton>();
+            foreach (OVRBone bone in overrideSkeleton.Bones)
+            {
+                lerpStartPositions.Add(new Vector3(bone.Transform.localPosition.x, bone.Transform.localPosition.y, bone.Transform.localPosition.z));
+                lerpStartRotations.Add(new Quaternion(bone.Transform.localRotation.x, bone.Transform.localRotation.y, bone.Transform.localRotation.z, bone.Transform.localRotation.w));
+            }
+
+            OVRSkeleton mainSkeleton = hands.mainHand.GetComponent<OVRSkeleton>();
+            foreach (OVRBone bone in mainSkeleton.Bones)
+            {
+                lerpEndPositions.Add(new Vector3(bone.Transform.localPosition.x, bone.Transform.localPosition.y, bone.Transform.localPosition.z));
+                lerpEndRotations.Add(new Quaternion(bone.Transform.localRotation.x, bone.Transform.localRotation.y, bone.Transform.localRotation.z, bone.Transform.localRotation.w));
+            }
+        }
+
+        if (showingTechnique == SHOWING_TECHNIQUE.OVERRIDE_HAND && studyStep == STUDY_STEP.SHOW_TECHNIQUE && isLerping)
+        {
+            if (Time.time > lerpStartTime + lerpDurationAfterShow)
+            {
+                isLerping = false;
+            }
+            else
+            {
+                float lerpProgression = (Time.time - lerpStartTime) / lerpDurationAfterShow;
+
+                int boneIndex = 0;
+                OVRSkeleton mainSkeleton = hands.mainHand.GetComponent<OVRSkeleton>();
+                foreach (OVRBone bone in mainSkeleton.Bones)
+                {
+                    bone.Transform.localPosition = Vector3.Lerp(lerpStartPositions[boneIndex], lerpEndPositions[boneIndex], lerpProgression);
+                    bone.Transform.localRotation = Quaternion.Lerp(lerpStartRotations[boneIndex], lerpEndRotations[boneIndex], lerpProgression);
+
+                    boneIndex++;
+                }
+            }
+        }
+    }
+
     private void OnNeutralEnd()
     {
         if (studyStep == STUDY_STEP.FIRST_PERFORM)
@@ -264,7 +328,7 @@ public class StudyController : MonoBehaviour
 
     private void HandLog(string detectedGestureName="n/a")
     {
-        handLogger.WriteDataToCSV(participantNumber, modalityNumber, showingTechnique, Time.time, isTraining, studyStep, isAnim,
+        handLogger.WriteDataToCSV(participantNumber, modalityNumber, showingTechnique, Time.time, isTraining, isLerping, studyStep, isAnim,
              currentRepetition, showGestureRepeats, currentExpectedGesture.name, detectedGestureName); //handlogger knows by itself the hand position
                 
     }
@@ -358,6 +422,8 @@ public class StudyController : MonoBehaviour
     {
         if(studyStep == STUDY_STEP.SHOW_TECHNIQUE)
         {
+            isLerping = false;
+
             // Setting the timestamp only the first time the button is pressed
             if (timestampStartFirstPerform < 0f)
             {
@@ -397,6 +463,8 @@ public class StudyController : MonoBehaviour
     {
         if(studyStep == STUDY_STEP.FIRST_PERFORM && (isFirstPerformDone || isCalledFromKeypad))
         {
+            isLerping = false;
+
             timestampStartRepetitions = Time.time;
 
             studyStep = STUDY_STEP.REPETITIONS;
@@ -413,6 +481,11 @@ public class StudyController : MonoBehaviour
 
     public void OnRecognizeEvent(Gesture detectedGesture)
     {
+        if (isLerping)
+        {
+            return;
+        }
+
         Debug.Log(detectedGesture.name);
 
         if (detectedGesture.name == currentExpectedGesture.name && currentExpectedGesture is StaticGesture)
@@ -488,7 +561,14 @@ public class StudyController : MonoBehaviour
         float currentClipLength = usedAnimator.GetCurrentAnimatorStateInfo(0).length;
         nextAnimPlayTimestamp = Time.time + currentClipLength + delayBetweenAnimations;
 
-        yield return new WaitForSeconds(currentClipLength);
+        yield return new WaitForSeconds(currentClipLength - 0.05f);
+
+        if (showingTechnique == SHOWING_TECHNIQUE.OVERRIDE_HAND)
+        {
+            isPreparingLerp = true;
+        }
+
+        yield return new WaitForSeconds(0.05f);
 
         isAnim = false;
         usedHand.SetActive(false);
