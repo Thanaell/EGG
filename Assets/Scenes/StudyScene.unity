@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   participantNumber: 3
-  modalityNumber: 1
+  modalityNumber: 2
   hands:
     overrideAnimator: {fileID: 900961126}
     externalAnimator: {fileID: 1144774443}
@@ -280,6 +280,21 @@ MonoBehaviour:
     gesture: {fileID: 11400000, guid: e08db2dee3f2a7a4a94c70e5b13b7b45, type: 2}
   handLogger: {fileID: 726464491}
   mainDataLogger: {fileID: 726464493}
+  gestureChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1441105936}
+        m_TargetAssemblyTypeName: GestureDetector, Assembly-CSharp
+        m_MethodName: UpdateGestureList
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!4 &188874846
 Transform:
   m_ObjectHideFlags: 0
@@ -1996,34 +2011,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 1
   skeleton: {fileID: 1570765581}
-  gestures:
-  - {fileID: 11400000, guid: 8c8c7a8a7d8f8774998921edb5d0c536, type: 2}
-  - {fileID: 11400000, guid: efbb0619c6dcdfb438f5c1d792881295, type: 2}
-  - {fileID: 11400000, guid: c2e608c854ff9c34ab558eebc5be079c, type: 2}
-  - {fileID: 11400000, guid: a1de91fc181e6a14f9fda1daa2ed06ef, type: 2}
-  - {fileID: 11400000, guid: c44a3b50ccdffeb469eaf6f973f36e72, type: 2}
-  - {fileID: 11400000, guid: 7d12897d85e0b9041b5c5f766d847676, type: 2}
-  - {fileID: 11400000, guid: 073fa866e781ab445b5033e8a412302a, type: 2}
-  - {fileID: 11400000, guid: 6cbd78233f7a13e4992b1e1c4bb1335a, type: 2}
-  - {fileID: 11400000, guid: 1c30fce4aa4877b4587b781dd71262d1, type: 2}
-  - {fileID: 11400000, guid: 66323938f6b037a4fa7739e43ad86aaf, type: 2}
-  - {fileID: 11400000, guid: 14d42a26bcec1e14582a7f7b7f604f3a, type: 2}
-  - {fileID: 11400000, guid: 4d31f6bb1003c4e4aa3a759a560fd166, type: 2}
-  - {fileID: 11400000, guid: 70fc5cdb92961bb48835964291084b13, type: 2}
-  - {fileID: 11400000, guid: 8e744c72f6785b547929536ccf0a96f4, type: 2}
-  - {fileID: 11400000, guid: 724e61b9fdea0ea4899401d053f14e8a, type: 2}
-  - {fileID: 11400000, guid: cbb5a6e17ad450c4c9d17907d7b0b12e, type: 2}
-  - {fileID: 11400000, guid: d0946a1b57d363f4ca09a6da5b0b6230, type: 2}
-  - {fileID: 11400000, guid: 26b7df94af32a6141ab63ac3facb6f26, type: 2}
-  - {fileID: 11400000, guid: d9b4bae713787bb4faaca9062ed57c58, type: 2}
-  - {fileID: 11400000, guid: 6aa48047c46ab644f911d2fbe34f0023, type: 2}
-  - {fileID: 11400000, guid: 21aece4e9e67b1d44a7628c6444bc46c, type: 2}
-  - {fileID: 11400000, guid: 44ed7c2ad9ffae44797e5ecce582060d, type: 2}
-  - {fileID: 11400000, guid: d42c42ad08bf3a749822f61f98a72c1d, type: 2}
-  - {fileID: 11400000, guid: c8f714a5a2565834993858bfabce4d73, type: 2}
-  - {fileID: 11400000, guid: 658ba73eed3efdc40970b371263fecfd, type: 2}
-  - {fileID: 11400000, guid: 252b7ecfb7e8ee343b9f88a7320cb2a4, type: 2}
-  - {fileID: 11400000, guid: 4c53ff6ce3a39db44ac2fb4fdaef775b, type: 2}
   debugMode: 1
   notRecognize:
     m_PersistentCalls:

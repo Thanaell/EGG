@@ -7,7 +7,7 @@ using System.IO;
 using Unity.VisualScripting;
 
 
-public class GestureDetector : MonoBehaviour
+public class StaticGestureDetector : MonoBehaviour
 {
     private int gestureCount=0;
 
@@ -18,8 +18,7 @@ public class GestureDetector : MonoBehaviour
     public OVRSkeleton skeleton;
 
     // List that will be populated after we save some gestures
-    [Header("List of Gestures")]
-    public List<StaticGesture> gestures;
+    private List<StaticGesture> gestures;
 
     // List of bones took from the OVRSkeleton
     private List<OVRBone> fingerbones = null;
@@ -178,7 +177,6 @@ public class GestureDetector : MonoBehaviour
                     isDiscarded = true;
                     break;
                 }
-
                 // if the distance is correct we will add it to the first float we have created
                 sumDistance += distance;
             }
@@ -203,5 +201,10 @@ public class GestureDetector : MonoBehaviour
     public void DebugGestureName(StaticGesture gesture)
     {
         Debug.Log(gesture.name);
+    }
+
+    public void UpdateGestureList(List<StaticGesture> sentGestures)
+    {
+        gestures = sentGestures;
     }
 }

@@ -6,6 +6,7 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public enum SHOWING_TECHNIQUE
 {
@@ -115,6 +116,9 @@ public class StudyController : MonoBehaviour
     private float staticGestureTimeoutDelay = 3f;
 
     private float lerpDurationAfterShow = 0.2f;
+
+
+    public UnityEvent<List<StaticGesture>> gestureChanged;
 
     void Start()
     {
@@ -387,6 +391,18 @@ public class StudyController : MonoBehaviour
             UI.repeatButton.GetComponent<MeshRenderer>().material.color = Color.grey;
 
             currentExpectedGesture = gestures[currentGestureIndex - 1];
+
+            //TODO : send event
+            List<StaticGesture> gestureList = new List<StaticGesture>();
+            if (currentExpectedGesture is StaticGesture)
+            {           
+                gestureList.Add((StaticGesture)currentExpectedGesture);
+            }
+            else
+            {
+                gestureList = ((DynamicGesture)currentExpectedGesture).orderedKeyFrames;
+            }
+            gestureChanged.Invoke(gestureList);
         }
         
     }
