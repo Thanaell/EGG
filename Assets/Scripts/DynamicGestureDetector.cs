@@ -15,13 +15,7 @@ public class DynamicGestureDetector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        runningTimers = new Dictionary<DynamicGesture, float>();
-        reachedKeyFrame= new Dictionary<DynamicGesture, int>();
-        foreach (var dynamicGesture in dynamicGestures)
-        {
-            reachedKeyFrame[dynamicGesture] = -1;
-        }
-        
+        ResetAllDetections();   
     }
 
     // Update is called once per frame
@@ -55,41 +49,50 @@ public class DynamicGestureDetector : MonoBehaviour
     {
         foreach (var dynamicGesture in dynamicGestures)
         {
-            //Debug.Log(gesture.name + " keyframe recognized");
-            if (dynamicGesture.orderedKeyFrames[0].name == gesture.name){ //first keyframe reached or rereached (resets gesture) => no gesture with several times the same keyframe
-                //start timer
-                runningTimers[dynamicGesture] = 0f;
-                // advance keyFrameNumber
-                reachedKeyFrame[dynamicGesture] = 0; //reached first keyframe
-            }
-            else
-            {
-                int nextKeyFrame = reachedKeyFrame[dynamicGesture] + 1; //keyframe needed to progress this particular gesture
+            int nextKeyFrame = reachedKeyFrame[dynamicGesture] + 1;
 
-                if (dynamicGesture.orderedKeyFrames[nextKeyFrame].name == gesture.name)
+            if (dynamicGesture.orderedKeyFrames[nextKeyFrame].name == gesture.name)
+            {
+                //first frame
+                if (nextKeyFrame == -1)
                 {
-                    if (nextKeyFrame == dynamicGesture.orderedKeyFrames.Count - 1) //last keyframe reached
-                    {
-                        //Gesture recognition event
-                        onRecognized?.Invoke(dynamicGesture);
-                        //Remove timer
-                        runningTimers.Remove(dynamicGesture);
-                        //remove reachedKeyFrame
-                        reachedKeyFrame[dynamicGesture] = -1;
-                        DebugDynamicGesture(dynamicGesture);
-                    }
-                    else //intermediate keyframe reached
-                    {
-                        reachedKeyFrame[dynamicGesture]++;
-                    }
+                    //start timer
+                    runningTimers[dynamicGesture] = 0f;
+                    // advance keyFrameNumber
+                    reachedKeyFrame[dynamicGesture] = 0; //reached first keyframe
                 }
-            }
-            
+                //last frame
+                else if (nextKeyFrame == dynamicGesture.orderedKeyFrames.Count - 1)
+                {
+                    //Gesture recognition event
+                    onRecognized?.Invoke(dynamicGesture);
+                    //Remove timer
+                    runningTimers.Remove(dynamicGesture);
+                    //remove reachedKeyFrame
+                    reachedKeyFrame[dynamicGesture] = -1;
+                    DebugDynamicGesture(dynamicGesture);
+                }
+                //intermediate frame
+                else
+                {
+                    reachedKeyFrame[dynamicGesture]++;
+                }
+            }            
         }
     }
 
     public void DebugDynamicGesture(DynamicGesture dynamicGesture)
     {
         Debug.Log(dynamicGesture.name);
+    }
+
+    public void ResetAllDetections()
+    {
+        runningTimers = new Dictionary<DynamicGesture, float>();
+        reachedKeyFrame = new Dictionary<DynamicGesture, int>();
+        foreach (var dynamicGesture in dynamicGestures)
+        {
+            reachedKeyFrame[dynamicGesture] = -1;
+        }
     }
 }

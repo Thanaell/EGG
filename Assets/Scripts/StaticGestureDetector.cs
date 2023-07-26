@@ -133,9 +133,6 @@ public class StaticGestureDetector : MonoBehaviour
         // after the foreach we are going to associate the list of Vector3 to the one we create from the struct "g"
         g.fingerDatas = data;
 
-        // and in the end we will going to add this new gesture in our list of gestures
-        gestures.Add(g);
-
         UnityEditor.AssetDatabase.CreateAsset(g, "Assets/Gestures/Static/Frames/"+g.name+".asset");
         UnityEditor.AssetDatabase.SaveAssets();
         UnityEditor.AssetDatabase.Refresh();
@@ -151,47 +148,51 @@ public class StaticGestureDetector : MonoBehaviour
         // we set a new float of a positive infinity
         float currentMin = Mathf.Infinity;
 
-        // we start a foreach loop inside our list of gesture
-        foreach (var gesture in gestures)
+        if (gestures!=null && gestures.Count > 0)
         {
-            // initialize a new float about the distance
-            float sumDistance = 0;
-
-            // and a new bool to check if discart a gesture or not
-            bool isDiscarded = false;
-
-            // then with a for loop we check inside the list of bones we initalized at the start with "SetSkeleton"
-            for (int i = 0; i < fingerbones.Count; i++)
+            // we start a foreach loop inside our list of gesture
+            foreach (var gesture in gestures)
             {
-                // then we create a Vector3 that is exactly the transform from global position to local position of the current hand
-                // we are making the gesture
-                Vector3 currentData = skeleton.transform.InverseTransformPoint(fingerbones[i].Transform.position);
+                // initialize a new float about the distance
+                float sumDistance = 0;
 
-                // with a new float we calculate the distance between the current gesture we are making with all the gesture we saved
-                float distance = Vector3.Distance(currentData, gesture.fingerDatas[i]);
+                // and a new bool to check if discart a gesture or not
+                bool isDiscarded = false;
 
-                // if the distance is bigger respect the threshold
-                if (distance > gesture.threshold)
+                // then with a for loop we check inside the list of bones we initalized at the start with "SetSkeleton"
+                for (int i = 0; i < fingerbones.Count; i++)
                 {
-                    // then we discart it because or is another gesture or we made bad the gesture we wanted to do
-                    isDiscarded = true;
-                    break;
+                    // then we create a Vector3 that is exactly the transform from global position to local position of the current hand
+                    // we are making the gesture
+                    Vector3 currentData = skeleton.transform.InverseTransformPoint(fingerbones[i].Transform.position);
+
+                    // with a new float we calculate the distance between the current gesture we are making with all the gesture we saved
+                    float distance = Vector3.Distance(currentData, gesture.fingerDatas[i]);
+
+                    // if the distance is bigger respect the threshold
+                    if (distance > gesture.threshold)
+                    {
+                        // then we discart it because or is another gesture or we made bad the gesture we wanted to do
+                        isDiscarded = true;
+                        break;
+                    }
+                    // if the distance is correct we will add it to the first float we have created
+                    sumDistance += distance;
                 }
-                // if the distance is correct we will add it to the first float we have created
-                sumDistance += distance;
-            }
 
-            // if the gesture we made is not discarted and the distance of the gesture i minor then then Mathf.inifinty
-            if (!isDiscarded && sumDistance < currentMin)
-            {
-                // then we set current min to the distance we have
-                currentMin = sumDistance;
+                // if the gesture we made is not discarted and the distance of the gesture i minor then then Mathf.inifinty
+                if (!isDiscarded && sumDistance < currentMin)
+                {
+                    // then we set current min to the distance we have
+                    currentMin = sumDistance;
 
-                // and we associate the correct gesture we have just done to the variable we created
-                currentGesture = gesture;
-                found = true;
+                    // and we associate the correct gesture we have just done to the variable we created
+                    currentGesture = gesture;
+                    found = true;
+                }
             }
         }
+       
 
         // so in the end we can return from the function the exact gesture we want to do
         if (!found) return null;

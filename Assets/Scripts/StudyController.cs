@@ -119,6 +119,7 @@ public class StudyController : MonoBehaviour
 
 
     public UnityEvent<List<StaticGesture>> gestureChanged;
+    public UnityEvent stateChanged;
 
     void Start()
     {
@@ -188,7 +189,7 @@ public class StudyController : MonoBehaviour
     void Update()
     {
         // Logging each frame
-        if (currentGestureIndex <= 4){
+        if (currentGestureIndex <= 4 && studyStep!=STUDY_STEP.IDLE){
             HandLog();
         }
 
@@ -254,6 +255,7 @@ public class StudyController : MonoBehaviour
         }
         
         neutralTimeout = Time.time + neutralTimeoutDelay;
+        stateChanged.Invoke();
     }
 
     private void LateUpdate()
@@ -328,6 +330,7 @@ public class StudyController : MonoBehaviour
         {
             gestureTimeout = Time.time + staticGestureTimeoutDelay;
         }
+        stateChanged.Invoke();
     }
 
     private void HandLog(string detectedGestureName="n/a")
@@ -409,6 +412,7 @@ public class StudyController : MonoBehaviour
 
     public void StartShowTechnique()
     {
+        stateChanged.Invoke();
         if(studyStep != STUDY_STEP.REPETITIONS)
         {
             // Setting the timestamp only the first time the button is pressed
@@ -436,6 +440,7 @@ public class StudyController : MonoBehaviour
 
     public void StartFirstPerform()
     {
+        stateChanged.Invoke();
         if(studyStep == STUDY_STEP.SHOW_TECHNIQUE)
         {
             isLerping = false;
@@ -477,6 +482,7 @@ public class StudyController : MonoBehaviour
 
     public void StartRepetitions(bool isCalledFromKeypad = false)
     {
+        stateChanged.Invoke();
         if(studyStep == STUDY_STEP.FIRST_PERFORM && (isFirstPerformDone || isCalledFromKeypad))
         {
             isLerping = false;

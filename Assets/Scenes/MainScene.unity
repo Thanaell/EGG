@@ -133,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 8298269698017964132, guid: f80a9501a3cda474b82505ad9be8c733, type: 3}
       propertyPath: clip
       value: 
-      objectReference: {fileID: 7400000, guid: afe2517878342c34bbe7e4f937491728, type: 2}
+      objectReference: {fileID: 7400000, guid: ed67e6120e1bc0d4a9b390f1810dda5c, type: 2}
     - target: {fileID: 8298269698017964132, guid: f80a9501a3cda474b82505ad9be8c733, type: 3}
       propertyPath: m_Enabled
       value: 1
