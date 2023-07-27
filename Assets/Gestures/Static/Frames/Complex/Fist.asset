@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457b2a87a6bdacd40bd268e2ea5ab7fd, type: 3}
   m_Name: Fist
   m_EditorClassIdentifier: 
-  name: Fist
+  gestureName: Fist
   fingerDatas:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}

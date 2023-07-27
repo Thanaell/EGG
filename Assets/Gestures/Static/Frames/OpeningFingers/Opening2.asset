@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457b2a87a6bdacd40bd268e2ea5ab7fd, type: 3}
   m_Name: Opening2
   m_EditorClassIdentifier: 
-  name: Opening2
-  threshold: 0.1
+  gestureName: Opening2
   fingerDatas:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -39,3 +38,4 @@ MonoBehaviour:
   - {x: -0.06570748, y: -0.022170793, z: -0.010490768}
   - {x: -0.05546542, y: -0.021751236, z: 0.0036720634}
   - {x: -0.123322085, y: -0.06997311, z: 0.034525946}
+  threshold: 0.1

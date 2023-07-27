@@ -464,7 +464,7 @@ public class StudyController : MonoBehaviour
             studyStep = STUDY_STEP.SHOW_TECHNIQUE;
             showGestureRepeats++;
 
-            UI.instructionsText.text = "When you understand the gesture\npress the second button";
+            UI.instructionsText.text = "Watch the gesture until you understand it";
 
             UI.showButton.GetComponent<MeshRenderer>().material.color = Color.grey;
             UI.tryButton.GetComponent<MeshRenderer>().material.color = Color.red;

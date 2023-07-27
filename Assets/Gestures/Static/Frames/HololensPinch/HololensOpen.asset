@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457b2a87a6bdacd40bd268e2ea5ab7fd, type: 3}
   m_Name: HololensOpen
   m_EditorClassIdentifier: 
-  name: HololensOpen
-  threshold: 0.05
+  gestureName: HololensOpen
   fingerDatas:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -39,3 +38,4 @@ MonoBehaviour:
   - {x: -0.08179699, y: -0.057244033, z: -0.007093109}
   - {x: -0.06660754, y: -0.046410017, z: 0.0035867319}
   - {x: -0.06461963, y: -0.041025817, z: 0.01485005}
+  threshold: 0.05
