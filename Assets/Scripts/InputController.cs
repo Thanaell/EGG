@@ -5,7 +5,8 @@ using UnityEngine;
 public class InputController : MonoBehaviour
 {
     public StudyController studyController;
-
+    
+    //Change state through keyboard input for testing
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Keypad0))

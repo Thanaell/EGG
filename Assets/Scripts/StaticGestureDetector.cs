@@ -6,7 +6,8 @@ using System;
 using System.IO;
 using Unity.VisualScripting;
 
-
+// Detecting poses of hand and fingers from the main hand
+// Code adapted from https://www.youtube.com/watch?v=lBzwUKQ3tbw 
 public class StaticGestureDetector : MonoBehaviour
 {
     private int gestureCount=0;
@@ -22,10 +23,6 @@ public class StaticGestureDetector : MonoBehaviour
 
     // List of bones took from the OVRSkeleton
     private List<OVRBone> fingerbones = null;
-
-    // Boolean for the debugMode duh!
-    [Header("DebugMode")]
-    public bool debugMode = true;
 
     // Other boolean to check if are working correctly
     private bool hasStarted = false;
@@ -54,7 +51,6 @@ public class StaticGestureDetector : MonoBehaviour
     {
         // Check the function for know what it does
         SetSkeleton();
-
         // After initialize the skeleton set a boolean to true to confirm the initialization
         hasStarted = true;
     }
@@ -67,7 +63,7 @@ public class StaticGestureDetector : MonoBehaviour
     void Update()
     {
         // if in debug mode and we press Space, we will save a gesture
-        if (debugMode && Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             // Call the function for save the gesture
             Save();
@@ -88,7 +84,6 @@ public class StaticGestureDetector : MonoBehaviour
             {
                 // we change another boolean to avoid a loop of event
                 done = true;
-                //Debug.Log("recognized");
                 // after that i will invoke what put in the Event if is present
                 onRecognized?.Invoke(currentGesture);
             }
@@ -98,7 +93,6 @@ public class StaticGestureDetector : MonoBehaviour
                 // and we just activated the boolean from earlier
                 if (done)
                 {
-                    //Debug.Log("Not Recognized");
                     // we set to false the boolean again, so this will not loop
                     done = false;
 
@@ -115,7 +109,7 @@ public class StaticGestureDetector : MonoBehaviour
         StaticGesture g = StaticGesture.CreateInstance<StaticGesture>();
 
         // givin to it a default name
-        g.name = "New Gesture"+gestureCount.ToString();
+        g.gestureName = "New Gesture"+gestureCount.ToString();
         gestureCount++;
 
         // we create also a new list of Vector 3
@@ -133,7 +127,7 @@ public class StaticGestureDetector : MonoBehaviour
         // after the foreach we are going to associate the list of Vector3 to the one we create from the struct "g"
         g.fingerDatas = data;
 
-        UnityEditor.AssetDatabase.CreateAsset(g, "Assets/Gestures/Static/Frames/"+g.name+".asset");
+        UnityEditor.AssetDatabase.CreateAsset(g, "Assets/Gestures/Static/Frames/"+g.gestureName+".asset");
         UnityEditor.AssetDatabase.SaveAssets();
         UnityEditor.AssetDatabase.Refresh();
 
@@ -192,18 +186,14 @@ public class StaticGestureDetector : MonoBehaviour
                 }
             }
         }
-       
 
         // so in the end we can return from the function the exact gesture we want to do
         if (!found) return null;
         else return currentGesture;
     }
 
-    public void DebugGestureName(StaticGesture gesture)
-    {
-        Debug.Log(gesture.name);
-    }
-
+    // Updating list of gestures we currently seek to detect
+    // We don't want to try to detect all gestures at the same time, because it makes some gestures to hard to recognize
     public void UpdateGestureList(List<StaticGesture> sentGestures)
     {
         gestures = sentGestures;

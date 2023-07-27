@@ -5,6 +5,7 @@ using UnityEngine;
 using System;
 using Unity.VisualScripting;
 
+//Logger for hand positions each frame (except when study phase is STUDYSTEP.IDLE)
 public class HandLogger : MonoBehaviour
 {
 

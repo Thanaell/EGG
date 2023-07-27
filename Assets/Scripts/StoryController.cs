@@ -5,6 +5,7 @@ public enum HAND_STATE
     ANIM, TRACKING
 }
 
+// Playing animation over main hand (constantly)
 public class StoryController : MonoBehaviour
 {
     public string animationName;

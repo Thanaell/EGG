@@ -4,6 +4,8 @@ using System.IO;
 using UnityEngine;
 
 
+
+// Custom classes to deserialize Json into Participants and Modalities (guide for study)
 [System.Serializable]
 public class Modality
 {

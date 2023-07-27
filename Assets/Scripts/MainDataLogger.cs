@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using static OVRPlugin;
 
+//Logging compiled data (timers, booleans per phase, numbers of gesture detections)
 public class MainDataLogger : MonoBehaviour
 {
     private StreamWriter writer;

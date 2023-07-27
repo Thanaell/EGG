@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor.Animations;
 using UnityEditor;
 
+// Records animations with what happens on objetcToRecord
 public class RecordAnimationClip : MonoBehaviour
 {
     public AnimationClip clip;

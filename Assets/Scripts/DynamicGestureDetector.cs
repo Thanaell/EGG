@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-
-
+// Class handling detection of dynamic gestures
 public class DynamicGestureDetector : MonoBehaviour
 {
     public List<DynamicGesture> dynamicGestures;
@@ -51,7 +50,7 @@ public class DynamicGestureDetector : MonoBehaviour
         {
             int nextKeyFrame = reachedKeyFrame[dynamicGesture] + 1;
 
-            if (dynamicGesture.orderedKeyFrames[nextKeyFrame].name == gesture.name)
+            if (dynamicGesture.orderedKeyFrames[nextKeyFrame].gestureName == gesture.gestureName)
             {
                 //first frame
                 if (nextKeyFrame == -1)
@@ -70,7 +69,7 @@ public class DynamicGestureDetector : MonoBehaviour
                     runningTimers.Remove(dynamicGesture);
                     //remove reachedKeyFrame
                     reachedKeyFrame[dynamicGesture] = -1;
-                    DebugDynamicGesture(dynamicGesture);
+                    Debug.Log(dynamicGesture.gestureName);
                 }
                 //intermediate frame
                 else
@@ -81,11 +80,7 @@ public class DynamicGestureDetector : MonoBehaviour
         }
     }
 
-    public void DebugDynamicGesture(DynamicGesture dynamicGesture)
-    {
-        Debug.Log(dynamicGesture.name);
-    }
-
+    // Resets all timers and all counts of keyframes
     public void ResetAllDetections()
     {
         runningTimers = new Dictionary<DynamicGesture, float>();

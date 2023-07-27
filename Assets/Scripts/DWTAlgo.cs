@@ -5,6 +5,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Collections;
 using System;
 
+// Tentative of Dynamic Time Warping algorithm between an AnimationClip and a series of object positions
+// WARNING : NOT FUNCTIONAL
 public class DWTAlgo : MonoBehaviour
 {
     public OVRSkeleton skeleton;

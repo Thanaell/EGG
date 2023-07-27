@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Scriptable object storing poses of hand and fingers
 [CreateAssetMenu(fileName = "StaticGesture", menuName = "ScriptableObjects/StaticGesture", order = 1)]
 public class StaticGesture : Gesture
 {
