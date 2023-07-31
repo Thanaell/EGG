@@ -376,6 +376,9 @@ public class StudyController : MonoBehaviour
     // Idle is the first phase (before the left button press, nothing happens for the user
     public void StartIdle()
     {
+        isPreparingLerp = false;
+        isLerping = false;
+
         // Logging previous results if study has started
         if (currentGestureIndex != 0 && currentGestureIndex < 5)
         {
@@ -486,6 +489,7 @@ public class StudyController : MonoBehaviour
         stateChanged.Invoke();
         if(studyStep == STUDY_STEP.SHOW_TECHNIQUE)
         {
+            isPreparingLerp = false;
             isLerping = false;
 
             // Setting the timestamp only the first time the button is pressed
@@ -535,6 +539,7 @@ public class StudyController : MonoBehaviour
         stateChanged.Invoke();
         if(studyStep == STUDY_STEP.FIRST_PERFORM && (isFirstPerformDone || isCalledFromKeypad))
         {
+            isPreparingLerp = false;
             isLerping = false;
 
             timestampStartRepetitions = Time.time;
@@ -647,7 +652,7 @@ public class StudyController : MonoBehaviour
         // Initiating lerp just before the end of animation play
         yield return new WaitForSeconds(currentClipLength - 0.05f);
 
-        if (showingTechnique == SHOWING_TECHNIQUE.OVERRIDE_HAND)
+        if (showingTechnique == SHOWING_TECHNIQUE.OVERRIDE_HAND && studyStep==STUDY_STEP.SHOW_TECHNIQUE)
         {
             isPreparingLerp = true;
         }
