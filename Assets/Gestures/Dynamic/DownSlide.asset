@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c9a668520eb5241a6211f0fe50440b, type: 3}
   m_Name: DownSlide
   m_EditorClassIdentifier: 
-  name: DownSlide
-  threshold: 0.1
+  gestureName: DownSlide
   orderedKeyFrames:
   - {fileID: 11400000, guid: 70fc5cdb92961bb48835964291084b13, type: 2}
   - {fileID: 11400000, guid: 4d31f6bb1003c4e4aa3a759a560fd166, type: 2}

@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c9a668520eb5241a6211f0fe50440b, type: 3}
   m_Name: RightSlide
   m_EditorClassIdentifier: 
-  name: RightSlide
-  threshold: 0.15
+  gestureName: RightSlide
   orderedKeyFrames:
   - {fileID: 11400000, guid: c8f714a5a2565834993858bfabce4d73, type: 2}
   - {fileID: 11400000, guid: 658ba73eed3efdc40970b371263fecfd, type: 2}

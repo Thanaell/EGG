@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c9a668520eb5241a6211f0fe50440b, type: 3}
   m_Name: Closed-Index
   m_EditorClassIdentifier: 
-  name: Closed-Index
-  threshold: 0.1
+  gestureName: Closed-Index
   orderedKeyFrames:
   - {fileID: 11400000, guid: 6cbd78233f7a13e4992b1e1c4bb1335a, type: 2}
   - {fileID: 11400000, guid: 1c30fce4aa4877b4587b781dd71262d1, type: 2}

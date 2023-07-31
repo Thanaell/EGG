@@ -257,7 +257,7 @@ MonoBehaviour:
   - refName: Training1
     gesture: {fileID: 11400000, guid: ca35741f36393ae42b1063e91f3d7ffb, type: 2}
   - refName: Training2
-    gesture: {fileID: 11400000, guid: bec9e75310b502345b9212f8d010eb9d, type: 2}
+    gesture: {fileID: 11400000, guid: 80b84d538e982804381f94f8255ac56d, type: 2}
   - refName: Training3
     gesture: {fileID: 11400000, guid: c09c9019ac603164191476214c266283, type: 2}
   - refName: Static1
@@ -269,7 +269,7 @@ MonoBehaviour:
   - refName: Short1
     gesture: {fileID: 11400000, guid: e3494aba0cf7a5648970c2050a3b2c09, type: 2}
   - refName: Short2
-    gesture: {fileID: 11400000, guid: 80b84d538e982804381f94f8255ac56d, type: 2}
+    gesture: {fileID: 11400000, guid: bec9e75310b502345b9212f8d010eb9d, type: 2}
   - refName: Short3
     gesture: {fileID: 11400000, guid: 089b7974d65a1e04187823ac14a9fc97, type: 2}
   - refName: Long1
