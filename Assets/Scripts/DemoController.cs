@@ -14,7 +14,10 @@ public class DemoController : MonoBehaviour
     DEMO_MODE currentMode;
     SHOWING_TECHNIQUE currentTechnique;
 
+    public Gesture defaultGesture;
+
     public HandsAndAnimators hands;
+    public GameObject detectionMarker;
 
     private bool isPreparingLerp;
     private bool isLerping;
@@ -37,7 +40,7 @@ public class DemoController : MonoBehaviour
 
     private float lerpDurationAfterShow = 0.2f;
 
-        public UnityEvent<List<StaticGesture>> gestureChanged;
+    public UnityEvent<List<StaticGesture>> gestureChanged;
     public UnityEvent stateChanged;
 
     private void Start()
@@ -48,7 +51,8 @@ public class DemoController : MonoBehaviour
         nextStaticGestureDetectionTimestamp = -1f;
         nextAnimPlayTimestamp = 0f;
 
-        SwitchMode(DEMO_MODE.IDLE);
+        SwitchTechnique(SHOWING_TECHNIQUE.OVERRIDE_HAND);
+        SwitchGesture(defaultGesture);
     }
 
     private void Update()
@@ -171,6 +175,8 @@ public class DemoController : MonoBehaviour
         currentMode = newMode;
         stateChanged.Invoke();
 
+        detectionMarker.GetComponent<Renderer>().material.color = Color.red;
+
         switch (currentMode)
         {
             case DEMO_MODE.IDLE:
@@ -227,7 +233,11 @@ public class DemoController : MonoBehaviour
             }
         }
 
-        // TODO handle UI
+        if (detectedGesture.name == currentExpectedGesture.name)
+        {
+            detectionMarker.GetComponent<Renderer>().material.color = Color.green;
+            StartCoroutine(ChangeDetectionMarkerColor());
+        }
     }
 
     // Coroutine handling a pause between animation plays in the show technique phase
@@ -252,5 +262,11 @@ public class DemoController : MonoBehaviour
         // Disabling animation play and going back to tracking
         usedHand.SetActive(false);
         hands.mainHandRenderer.enabled = true;
+    }
+
+    private IEnumerator ChangeDetectionMarkerColor()
+    {
+        yield return new WaitForSeconds(1);
+        detectionMarker.GetComponent<Renderer>().material.color = Color.red;
     }
 }
